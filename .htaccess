@@ -4,4 +4,4 @@
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^mdezazulhassanbiswas.github.io$ [OR]
 RewriteCond %{HTTP_HOST} ^www.mdezazulhassanbiswas.github.io$
-RewriteRule (.*)$ https://www.mdezazulhassanbiswas.infinityfreeapp.com/$1 [R=301, L]
+RewriteRule (.*)$ mdezazulhassanbiswas.infinityfreeapp.com/$1 [R=301, L]
