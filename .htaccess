@@ -7,5 +7,5 @@ RewriteCond %{HTTP_HOST} ^www.mdezazulhassanbiswas.github.io$
 RewriteRule (.*)$ mdezazulhassanbiswas.infinityfreeapp.com/$1 [R=301, L]
 
 
-Redirect /index.html mdezazulhassanbiswas.infinityfreeapp.com
+Redirect mdezazulhassanbiswas.github.io mdezazulhassanbiswas.infinityfreeapp.com
 #Redirect /path/to/old/file/old.html https://www.example.com/new/file/new.html
