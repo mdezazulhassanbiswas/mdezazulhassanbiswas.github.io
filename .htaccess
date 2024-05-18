@@ -2,8 +2,8 @@
 #mdezazulhassanbiswas.infinityfreeapp.com
 
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^mdezazulhassanbiswas.github.io/$ [OR]
-RewriteCond %{HTTP_HOST} ^https://mdezazulhassanbiswas.github.io$
+RewriteCond %{HTTP_HOST} ^mdezazulhassanbiswas.github.io$ [OR]
+RewriteCond %{HTTP_HOST} ^https://mdezazulhassanbiswas.github.io/$
 RewriteRule (.*)$ mdezazulhassanbiswas.infinityfreeapp.com/$1 [R=301, L]
 
 
