@@ -1,0 +1,84 @@
+#domain = mdezazulhassanbiswas.infinityfreeapp.com
+#domain = mdezazulhassanbiswas.gihub.io
+
+# ================== chartset & language =================
+#change default utf-chartset & language{
+  RewriteEngine on
+  AddDefaultCharset UTF-8
+  DefaultLanguage en-GB
+#}
+
+
+# ================== time zone =================
+#set default time zone{
+  RewriteEngine on
+  #SetEnv TZ Europe/London
+  SetEnv TZ Bangladesh/Dhaka
+#}
+
+
+# ================== email =================
+#set email for server admin{
+  RewriteEngine on
+  ServerSignature EMail
+  #SetEnv SERVER_ADMIN info@mdezazulhassanbiswas.infinityfreeapp.com
+  SetEnv SERVER_ADMIN mdezazulhassanbiswas@gmail.com
+#}
+
+
+# ================== https =================
+#re-direct to https{
+  RewriteEngine on
+  RewriteCond %{SERVER_PORT} 80
+  RewriteRule ^(.*)$ https://mdezazulhassanbiswas.gihub.io/$1 [R=301,L,NE]
+  Header always set Content-Security-Policy "upgrade-insecure-requests;"
+#}
+
+
+#force https{
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !^www\.(.*)$ [OR,NC]
+  RewriteCond %{https} off
+  RewriteRule ^(.*)$ https://mdezazulhassanbiswas.gihub.io/$1 [R=301,L]
+#}
+
+#redirect to https{
+  RewriteEngine On
+  RewriteCond %{HTTPS} !on
+  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URL}
+#}
+
+
+# ================== www =================
+#remove www{
+  RewriteEngine on
+  RewriteBase /
+  RewriteCond %{HTTP_HOST} ^www.mdezazulhassanbiswas.gihub.io [NC]
+  RewriteRule ^(.*)$ https://mdezazulhassanbiswas.gihub.io/$1 [L,R=301]
+#}
+
+
+# ================== error page =================
+#error pages{
+  RewriteEngine on
+  #ErrorDocument 400 /errors/400.html
+  ErrorDocument 400 /index.html
+  ErrorDocument 401 /index.html
+  ErrorDocument 402 /index.html
+  ErrorDocument 403 /index.html
+  ErrorDocument 404 /index.html
+  ErrorDocument 405 /index.html
+#}
+
+
+# ================== .html =================
+
+#remove .html extention{
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*)$ $1.html [NC,L]
+#}
+
+
