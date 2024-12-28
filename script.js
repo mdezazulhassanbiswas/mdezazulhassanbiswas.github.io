@@ -352,12 +352,13 @@
                 window.alert("You are offline!");
                 // window.location.reload();
                 checkStatus = setInterval(() => {
-                    location.reload();
+                    window.location.reload()
+                    // location.reload();
                     }, 10000); // Refreshes the page after 10 seconds
                 
             } else {
                 clearInterval(checkStatus)
-                window.alert("back to online!");
+                window.alert("Welcome back!");
             }
         }
             
