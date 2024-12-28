@@ -340,4 +340,38 @@
   // }
 
 
+
+
+
+        // Listen for the online event
+        window.addEventListener('online', () => {
+            // console.log('Back online. Refreshing the page...');
+            location.reload(); // Refresh the page
+        });
+
         
+        // older ==================================
+        
+
+            
+        // Function to check the user's online status
+        function updateStatus() {
+            let checkStatus
+            
+            if (navigator.onLine) {
+                window.location.reload();
+                window.alert("Back to online!");
+                clearInterval(checkStatus)
+            } else {
+                window.alert("You are offline!");
+                checkStatus = setInterval(() => {
+                    location.reload();
+                    }, 10000); // Refreshes the page after 10 seconds
+            }
+        }
+            
+        // Initial check
+        updateStatus()
+        // Add event listeners to detect when the user goes online or offline
+        window.addEventListener("online", updateStatus);
+        window.addEventListener("offline", updateStatus);
