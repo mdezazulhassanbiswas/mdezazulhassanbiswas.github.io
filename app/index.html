@@ -77,13 +77,14 @@
 
         setTimeout(() => {
             window.location.reload();
-        }, 120000); // Refresh every 30 seconds
+        }, 60000); // Refresh every 30 seconds
 
 
         // Listen for the online event
         window.addEventListener('online', () => {
             // console.log('Back online. Refreshing the page...');
             location.reload(); // Refresh the page
+            window.location.reload()
         });
 
 
