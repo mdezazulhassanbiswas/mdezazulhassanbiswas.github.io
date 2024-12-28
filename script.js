@@ -343,16 +343,6 @@
 
 
 
-        // Listen for the online event
-        window.addEventListener('online', () => {
-            // console.log('Back online. Refreshing the page...');
-            location.reload(); // Refresh the page
-        });
-
-        
-        // older ==================================
-        
-
             
         // Function to check the user's online status
         function updateStatus() {
@@ -360,7 +350,6 @@
             
             if (navigator.onLine) {
                 window.location.reload();
-                window.alert("Back to online!");
                 clearInterval(checkStatus)
             } else {
                 window.alert("You are offline!");
