@@ -353,7 +353,7 @@
                     }, 10000); // Refreshes the page every 10 seconds
 
             } else {
-                window.alert("Back to online!");
+                // window.alert("Back to online!");
                 clearInterval(checkStatus)
             }
         }
