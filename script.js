@@ -349,16 +349,17 @@
             let checkStatus
             
             if (navigator.offLine) {
+              body.style = "background: rgba(255, 0, 0, 0.5)"
                 window.alert("You are offline!");
                 // window.location.reload();
                 checkStatus = setInterval(() => {
-                    window.location.reload()
+                    location.reload()
                     // location.reload();
                     }, 10000); // Refreshes the page after 10 seconds
                 
             } else {
                 clearInterval(checkStatus)
-                window.alert("Welcome back!");
+               // window.alert("Welcome back!");
             }
         }
             
@@ -367,3 +368,11 @@
         // Add event listeners to detect when the user goes online or offline
         window.addEventListener("online", updateStatus);
         window.addEventListener("offline", updateStatus);
+
+
+
+
+
+
+
+
