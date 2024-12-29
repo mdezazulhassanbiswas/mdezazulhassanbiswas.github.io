@@ -341,6 +341,31 @@
 
 
 
+// Function to check the user's online status
+        function updateStatus() {
+            let checkStatus
+            
+            if (!navigator.onLine) {
+                window.alert("No internet!");
+
+                checkStatus = setInterval(() => {
+                    location.reload();
+                    }, 10000); // Refreshes the page every 10 seconds
+
+            } else {
+                window.alert("Back to online!");
+                clearInterval(checkStatus)
+            }
+        }
+            
+        // Initial check
+        updateStatus()
+
+        // Add event listeners to detect when the user goes online or offline
+        window.addEventListener("online", updateStatus);
+        window.addEventListener("offline", updateStatus);
+
+
 
 
         
