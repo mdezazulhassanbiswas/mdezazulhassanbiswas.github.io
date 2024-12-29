@@ -89,19 +89,19 @@
             });
         }
 
-        deleteAllCookies();
+        // deleteAllCookies();
 
         function clearLocalStorage() {
             localStorage.clear();
         }
 
-        clearLocalStorage();
+        // clearLocalStorage();
 
         function clearSessionStorage() {
             sessionStorage.clear();
         }
 
-        clearSessionStorage();
+        // clearSessionStorage();
             
         // Function to check the user's online status
         function updateStatus() {
@@ -115,7 +115,7 @@
                     }, 10000); // Refreshes the page every 10 seconds
 
             } else {
-                window.alert("Back to online!");
+                // window.alert("Back to online!");
                 clearInterval(checkStatus)
             }
         }
