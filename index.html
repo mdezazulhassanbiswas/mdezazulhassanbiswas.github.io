@@ -184,6 +184,11 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sint sed ad, officia dolorem eligendi quam culpa. Hic esse fuga reiciendis, provident voluptas tempora excepturi porro maxime ad voluptates, quasi iure sint perspiciatis minus, libero necessitatibus in dolor culpa nulla.
                 </span>
             </p>
+            <!-- url changer -->
+            <!-- window.onload = function() {
+                // Code to be executed after the page loads
+            }; -->
+            <button onclick="editUrl('https://www.example.com/new-path')">Edit URL</button>
         </section>
 
         <section id="faqs" class="content-page col surface-0">
@@ -246,6 +251,27 @@
     </footer>
     
     <script src="script.js"></script>
+
+    <script>
+
+    function editUrl(newUrl) {
+        // Check if the new URL is valid
+        if (isValidUrl(newUrl)) {
+          // Update the current URL
+          window.history.pushState({}, '', newUrl);
+        } else {
+          // Handle invalid URL (e.g., display an error message)
+          console.error("Invalid URL:", newUrl);
+        }
+      }
+      
+      // Helper function to validate URLs (basic check)
+      function isValidUrl(url) {
+        const urlPattern = /^(https?:\/\/)?[^\s/$.?#].[^\s]*$/i;
+        return urlPattern.test(url);
+      }
+
+    </script>
     
 </body>
 </html>

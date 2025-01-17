@@ -18,7 +18,7 @@
 
   // detect when user switchs tabs
   window.addEventListener("blur", () =>{
-    document.title = "Web Developer | Md Ezazul Hassan Biswas";
+    document.title = "Web Developer";
   })
   window.addEventListener("focus", () =>{
     document.title = "Md Ezazul Hassan Biswas"
@@ -248,10 +248,12 @@
     })
   }
 
+  let date = new Date();
+  let hour = date.getHours();
+
   function colorAccent() {
     clrAccent = metaAccentClr.content;
-    // metaAccentClr.content = `hsl(${window.scrollY / scroller.childElementCount}deg, 100%, 45%)`
-    metaAccentClr.content = `hsl(${scroller.scrollLeft / scroller.childElementCount}deg, 100%, 45%)`
+    metaAccentClr.content = `hsl(${hour}00 deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
 
@@ -339,32 +341,11 @@
 
   // }
 
-
-
-// Function to check the user's online status
-        function updateStatus() {
-            let checkStatus
             
-            if (!navigator.onLine) {
-                window.alert("No internet!");
 
-                checkStatus = setInterval(() => {
-                    location.reload();
-                    }, 10000); // Refreshes the page every 10 seconds
 
-            } else {
-                // window.alert("Back to online!");
-                clearInterval(checkStatus)
-            }
-        }
             
-        // Initial check
-        updateStatus()
-
-        // Add event listeners to detect when the user goes online or offline
-        window.addEventListener("online", updateStatus);
-        window.addEventListener("offline", updateStatus);
-
+  
 
 
 
