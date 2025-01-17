@@ -8,25 +8,33 @@
 
   // 
 
-  function detectTheme() {
+  
+  function detectColorScheme() {
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
   
     if (prefersDarkScheme.matches) {
-      return 'dark';
+      // User prefers dark mode
+      alert('Dark mode is enabled.');
+      // Apply dark mode styles to your app
     } else {
-      return 'light';
+      // User prefers light mode
+      alert('Light mode is enabled.');
+      // Apply light mode styles to your app
     }
   }
-  detectTheme()
   
-  const currentTheme = detectTheme();
-  alert('Current theme:', currentTheme);
-
+  // Call the function to initially detect the color scheme
+  detectColorScheme();
+  
+  // Listen for changes in color scheme preference
+  prefersDarkScheme.addEventListener('change', detectColorScheme);
+    
+    
   // 
 
 
-  clrAccent = metaAccentClr.content;
-  root.style.setProperty('--clr-accent', clrAccent);
+  // clrAccent = metaAccentClr.content;
+  // root.style.setProperty('--clr-accent', clrAccent);
 
   const images = document.querySelectorAll('img');
   images.forEach(image => {
