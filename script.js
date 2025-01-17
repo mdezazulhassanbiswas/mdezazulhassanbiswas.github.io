@@ -6,6 +6,23 @@
   // metaAccentClr.content = `hsl(150deg, 100%, 50%)`
   // += scrollY
 
+  // 
+
+  function detectTheme() {
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  
+    if (prefersDarkScheme.matches) {
+      return 'dark';
+    } else {
+      return 'light';
+    }
+  }
+  
+  const currentTheme = detectTheme();
+  alert('Current theme:', currentTheme);
+
+  // 
+
 
   clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);

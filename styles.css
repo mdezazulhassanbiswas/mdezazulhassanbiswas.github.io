@@ -627,7 +627,8 @@ html{
     overscroll-behavior: contain;
     scroll-snap-type: y proximity;
     /* scroll-padding: 0; */
-    font-size: 70%;
+    
+    /* font-size: 70%; */
   
     /* for child */
     scroll-snap-align: start;
