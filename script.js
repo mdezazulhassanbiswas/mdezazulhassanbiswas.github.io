@@ -17,6 +17,7 @@
       return 'light';
     }
   }
+  detectTheme()
   
   const currentTheme = detectTheme();
   alert('Current theme:', currentTheme);
