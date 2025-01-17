@@ -6,12 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="authore" content="Web Developer | Md Ezazul Hassan Biswas, mdezazulhassanbiswas@gmail.com">
     <meta name="copyright" content="Web Developer | Md Ezazul Hassan Biswas">
-    <title>Web App</title>
+    <title>Web Developer</title>
 
     <style>
-        html{          
-            color-scheme: dark light; 
-        }
 
         *{
             margin: 0;
@@ -19,37 +16,6 @@
             box-sizing: border-box;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             text-transform: capitalize;
-
-            accent-color: hsl(209, 100%, 50%);
-            caret-color: hsl(209, 100%, 50%);
-        }
-
-        ::-webkit-scrollbar{
-            width: 0px;
-        }
-
-        ::-webkit-scrollbar-thumb{
-            background: hsl(209, 100%, 50%);
-            border-radius: 10px;
-        }
-
-        ::selection{
-            color: white;
-            background: hsl(209, 100%, 50%);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: black;
-                color: white;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            body {
-            background: white;
-            color: black;
-            }
         }
         
         body{
@@ -63,9 +29,6 @@
             width: 100dvw;
             height: 100dvh;
             overflow: hidden;
-        }
-
-        #app{
             border: none;
             outline: none;
         }
@@ -74,60 +37,26 @@
 <body>
     <iframe id="app" 
         src="https://mdezazulhassanbiswas.github.io" frameborder="0">
-        <title>Web App</title>
+        <title>Web Developer</title>
     </iframe>
 
     <script>
-        requestFullscreen()
-
-
-        function deleteAllCookies() {
-            document.cookie.split(";").forEach((cookie) => {
-                const eqPos = cookie.indexOf("=");
-                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
-            });
-        }
-
-        // deleteAllCookies();
-
-        function clearLocalStorage() {
-            localStorage.clear();
-        }
-
-        // clearLocalStorage();
-
-        function clearSessionStorage() {
-            sessionStorage.clear();
-        }
-
-        // clearSessionStorage();
-            
-        // Function to check the user's online status
-        function updateStatus() {
-            let checkStatus
-            
-            if (!navigator.onLine) {
-                window.alert("No internet!");
-
-                checkStatus = setInterval(() => {
-                    location.reload();
-                    }, 10000); // Refreshes the page every 10 seconds
-
-            } else {
-                // window.alert("Back to online!");
-                clearInterval(checkStatus)
-            }
-        }
-            
-        // Initial check
-        updateStatus()
-
-        // Add event listeners to detect when the user goes online or offline
-        window.addEventListener("online", updateStatus);
-        window.addEventListener("offline", updateStatus);
-
-
+        if (document.fullscreenElement) {
+    /* 
+    * Do nothing if a fullscreen element already exists. 
+    * This prevents issues if the user tries to 
+    * enter fullscreen mode multiple times.
+    */
+    } else if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+    }
+        
     </script>
 </body>
 </html>
