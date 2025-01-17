@@ -43,9 +43,7 @@
     speed : loader.dataset.speed,
     duration : loader.dataset.duration,
     delay: loader.dataset.delay,
-    // color: "--clr-accent"    
-    color: clrAccent
-
+    color: "--clr-accent"    
   } 
 
   let startValue = 0,
