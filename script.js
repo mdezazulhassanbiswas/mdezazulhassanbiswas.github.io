@@ -253,7 +253,7 @@
 
   function colorAccent() {
     clrAccent = metaAccentClr.content;
-    metaAccentClr.content = `hsl(${hour}00 deg, 100%, 45%)`
+    metaAccentClr.content = `hsl(${hour}00deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
 
