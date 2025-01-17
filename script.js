@@ -24,6 +24,17 @@
     document.title = "Md Ezazul Hassan Biswas"
   })
 
+  let date = new Date();
+  let hour = date.getHours();
+
+  function colorAccent() {
+    clrAccent = metaAccentClr.content;
+    metaAccentClr.content = `hsl(${hour}0deg, 100%, 45%)`
+    root.style.setProperty('--clr-accent', clrAccent);
+  }
+  colorAccent()
+
+
   // loder
   let loader = document.getElementById("loader"),
   backGround = loader.querySelector(".progress .back-ground")
@@ -32,7 +43,9 @@
     speed : loader.dataset.speed,
     duration : loader.dataset.duration,
     delay: loader.dataset.delay,
-    color: "--clr-accent"
+    // color: "--clr-accent"    
+    color: clrAccent
+
   } 
 
   let startValue = 0,
@@ -248,15 +261,7 @@
     })
   }
 
-  let date = new Date();
-  let hour = date.getHours();
-
-  function colorAccent() {
-    clrAccent = metaAccentClr.content;
-    metaAccentClr.content = `hsl(${hour}00deg, 100%, 45%)`
-    root.style.setProperty('--clr-accent', clrAccent);
-  }
-
+  
   function textRevelOnscroll() {
     let textRevelOnscroll = document.querySelectorAll(".text-revel-onscroll")
 
