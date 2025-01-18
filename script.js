@@ -48,12 +48,12 @@
   let date = new Date();
   let hour = date.getHours();
 
-  // function colorAccent() {
+  function colorAccent() {
     clrAccent = metaAccentClr.content;
     metaAccentClr.content = `hsl(${hour}0deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
-  // }
-  // colorAccent()
+  }
+  colorAccent()
 
 
   // loder
@@ -64,8 +64,8 @@
     speed : loader.dataset.speed,
     duration : loader.dataset.duration,
     delay: loader.dataset.delay,
-    // color: "--clr-accent"    
-    color:  clrAccent   
+    color: "--clr-accent"    
+    // color:  clrAccent   
   } 
 
   let startValue = 0,
