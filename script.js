@@ -34,8 +34,8 @@
   // 
 
 
-  // clrAccent = metaAccentClr.content;
-  // root.style.setProperty('--clr-accent', clrAccent);
+  clrAccent = metaAccentClr.content;
+  root.style.setProperty('--clr-accent', clrAccent);
 
   const images = document.querySelectorAll('img');
   images.forEach(image => {
@@ -47,10 +47,11 @@
 
   let date = new Date();
   let hour = date.getHours();
+  let minutes = date.getMinutes();
 
   function colorAccent() {
     clrAccent = metaAccentClr.content;
-    metaAccentClr.content = `hsl(${hour}0deg, 100%, 45%)`
+    metaAccentClr.content = `hsl(${minutes}0deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
   colorAccent()
