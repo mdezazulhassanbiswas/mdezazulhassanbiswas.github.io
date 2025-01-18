@@ -1,7 +1,7 @@
   const root = document.documentElement,
   head = document.head,
   body = document.body;
-  metaAccentClr = document.querySelector("meta[name='theme-color']")
+  let metaAccentClr = document.querySelector("meta[name='theme-color']")
 
   // += scrollY
 
@@ -34,7 +34,7 @@
   // 
 
 
-  clrAccent = metaAccentClr.content;
+  let clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
 
   const images = document.querySelectorAll('img');
@@ -50,7 +50,7 @@
   let minutes = date.getMinutes();
 
   function colorAccent() {
-    clrAccent = metaAccentClr.content;
+    let clrAccent = metaAccentClr.content;
     metaAccentClr.content = `hsl(${minutes}0deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
