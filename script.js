@@ -3,7 +3,6 @@
   body = document.body;
   metaAccentClr = document.querySelector("meta[name='theme-color']")
 
-  // metaAccentClr.content = `hsl(150deg, 100%, 50%)`
   // += scrollY
 
   // 
@@ -14,12 +13,14 @@
   
     if (prefersDarkScheme.matches) {
       // User prefers dark mode
-      alert('Dark mode is enabled.');
+
       // Apply dark mode styles to your app
+      root.style.setProperty('color-scheme', 'dark');
     } else {
       // User prefers light mode
-      alert('Light mode is enabled.');
+
       // Apply light mode styles to your app
+      root.style.setProperty('color-scheme', 'light');
     }
   }
   
@@ -42,13 +43,7 @@
     image.setAttribute('draggable', 'false')
   })
 
-  // detect when user switchs tabs
-  window.addEventListener("blur", () =>{
-    document.title = "Web Developer";
-  })
-  window.addEventListener("focus", () =>{
-    document.title = "Md Ezazul Hassan Biswas"
-  })
+
 
   let date = new Date();
   let hour = date.getHours();
@@ -91,7 +86,6 @@
     }
   }, loaderSetting.speed)
 
-  // document.body.removeChild(loader)
 
   const headerSection = document.getElementById("header");
   const nav = document.getElementById("nav")
