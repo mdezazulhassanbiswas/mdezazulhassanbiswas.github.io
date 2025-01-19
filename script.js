@@ -26,7 +26,7 @@
   }
   colorAccent()
 
-  setInterval(colorAccent(), 1000); // 1min
+  setInterval(colorAccent(), 60000); // 1min
 
   let clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
