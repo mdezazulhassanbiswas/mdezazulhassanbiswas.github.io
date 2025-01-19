@@ -20,6 +20,8 @@
   let date = new Date();
   let hour = date.getHours();
   let minutes = date.getMinutes();
+  
+  let day = date.getDate();
 
   function colorAccent() {
     let clrAccent = metaAccentClr.content;
@@ -27,6 +29,8 @@
     root.style.setProperty('--clr-accent', clrAccent);
   }
   colorAccent()
+
+  setInterval(colorAccent(), 1000); // 1min
 
 
   // loder
