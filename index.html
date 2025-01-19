@@ -52,25 +52,22 @@
             });
         }
       </script>
-
+      
       <?php
-      // Function to generate the current date in YYYY-MM-DD format
-      function generateMetaDate() {
-          $currentDate = date('Y-m-d');
+      function updateMetaDate() {
+          $currentDate = date("Y-m-d");
           echo '<meta name="date" content="' . $currentDate . '" scheme="YYYY-MM-DD">';
       }
-      
-      // Call the function where you want to insert the meta tag
-      generateMetaDate();
       ?>
-    <!-- <meta name="date" content="2025-01-19" scheme="YYYY-MM-DD"> -->
+      
+
 </head>
 <body> 
     <span id="custom-cursor"></span>
     <span id="custom-cursor-two"></span>
 
     <!-- data speed (20) === page load time -->
-    <section id="loader" class="grid xy-center surface-0" data-speed="15" data-duration="100" data-delay="0">
+    <section id="loader" class="grid xy-center surface-0" data-speed="20" data-duration="100" data-delay="0">
         <section class="progress">
             <div class="back-ground"></div>
             <div class="fore-ground surface-0"></div>
@@ -217,6 +214,7 @@
 
 
     </main>
+
     <footer class="container-grid">
         <section class="content-page flex x-between">
             <p> &copy; <span class="">Md Ezazul Hassan Biswas</span>.</p>

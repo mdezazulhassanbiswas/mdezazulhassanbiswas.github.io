@@ -21,12 +21,12 @@
 
   function colorAccent() {
     let clrAccent = metaAccentClr.content;
-    metaAccentClr.content = `hsl(${minutes}0deg, 100%, 45%)`
+    metaAccentClr.content = `hsl(${minutes}deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
   colorAccent()
 
-  setInterval(colorAccent(), 60000); // 1min
+  setInterval(colorAccent, 60000); // 1min
 
   let clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
