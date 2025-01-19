@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="authore" content="Web Developer | Md Ezazul Hassan Biswas, mdezazulhassanbiswas@gmail.com">
-    <meta name="copyright" content="Web Developer | Md Ezazul Hassan Biswas">
     <title>Web Developer</title>
 
     <style>
+        @media (prefers-color-scheme: light) {
+          :root {
+            background: hsl(0, 0%, 100%);
+            color: hsl(0, 0%, 0%);
+          }
+        }
+        @media (prefers-color-scheme: dark) {
+          :root {
+            background: hsl(0, 0%, 0%);
+            color: hsl(0, 0%, 100%);
+          }
+        }
 
         *{
             margin: 0;
@@ -41,22 +52,28 @@
     </iframe>
 
     <script>
-        if (document.fullscreenElement) {
-    /* 
-    * Do nothing if a fullscreen element already exists. 
-    * This prevents issues if the user tries to 
-    * enter fullscreen mode multiple times.
-    */
-    } else if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-    }
+        function detectColorScheme() {
+          const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         
+          if (prefersDarkScheme.matches) {
+            // User prefers dark mode
+      
+            // Apply dark mode styles to your app
+            root.style.setProperty('color-scheme', 'dark');
+          } else {
+            // User prefers light mode
+      
+            // Apply light mode styles to your app
+            root.style.setProperty('color-scheme', 'light');
+          }
+        }
+        
+        // Call the function to initially detect the color scheme
+        detectColorScheme();
+        
+        // Listen for changes in color scheme preference
+        prefersDarkScheme.addEventListener('change', detectColorScheme);
+ 
     </script>
 </body>
 </html>

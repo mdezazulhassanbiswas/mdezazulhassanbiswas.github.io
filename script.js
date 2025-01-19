@@ -5,34 +5,6 @@
 
   // += scrollY
 
-  // 
-
-  
-  function detectColorScheme() {
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-  
-    if (prefersDarkScheme.matches) {
-      // User prefers dark mode
-
-      // Apply dark mode styles to your app
-      root.style.setProperty('color-scheme', 'dark');
-    } else {
-      // User prefers light mode
-
-      // Apply light mode styles to your app
-      root.style.setProperty('color-scheme', 'light');
-    }
-  }
-  
-  // Call the function to initially detect the color scheme
-  detectColorScheme();
-  
-  // Listen for changes in color scheme preference
-  prefersDarkScheme.addEventListener('change', detectColorScheme);
-    
-    
-  // 
-
 
   let clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
