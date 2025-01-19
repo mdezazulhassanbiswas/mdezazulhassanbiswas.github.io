@@ -5,10 +5,6 @@
 
   // += scrollY
 
-
-  let clrAccent = metaAccentClr.content;
-  root.style.setProperty('--clr-accent', clrAccent);
-
   const images = document.querySelectorAll('img');
   images.forEach(image => {
     image.setAttribute('loading', 'lazy')
@@ -31,6 +27,9 @@
   colorAccent()
 
   setInterval(colorAccent(), 1000); // 1min
+
+  let clrAccent = metaAccentClr.content;
+  root.style.setProperty('--clr-accent', clrAccent);
 
 
   // loder
