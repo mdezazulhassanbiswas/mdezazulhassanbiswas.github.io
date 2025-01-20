@@ -13,11 +13,10 @@
 
 
 
-  let date = new Date();
-  let hour = date.getHours();
-  let minutes = date.getMinutes();
-  
-  let day = date.getDate();
+  const date = new Date(),
+  hour = date.getHours(),
+  minutes = date.getMinutes(),
+  day = date.getDate();
 
   // function colorAccent() {
     // let clrAccent = metaAccentClr.content;

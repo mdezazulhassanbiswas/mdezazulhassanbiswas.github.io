@@ -8,6 +8,19 @@
 
 /* 1.618 golden ratio; */
 
+.new-style{
+  --new-style: blue;
+  background: var(--new-style);
+  font-size: 1rem;
+  padding: .5em;
+  margin: .5em;
+  border-radius: .5em;
+
+  &:hover{
+    background: color-mix(in hsl, var(--new-style) , white 30%);
+  }
+}
+
 :root{
   /* user agent , first is prefered  */
   color-scheme: light dark;
