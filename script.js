@@ -21,7 +21,7 @@
 
   function colorAccent() {
     let clrAccent = metaAccentClr.content;
-    metaAccentClr.content = `hsl(${minutes}deg, 100%, 45%)`
+    metaAccentClr.content = `hsl(${day}0deg, 100%, 45%)`
     root.style.setProperty('--clr-accent', clrAccent);
   }
   colorAccent()
