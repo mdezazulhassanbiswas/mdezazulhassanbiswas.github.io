@@ -11,21 +11,10 @@
     image.setAttribute('draggable', 'false')
   })
 
-
-
   const date = new Date(),
   hour = date.getHours(),
   minutes = date.getMinutes(),
   day = date.getDate();
-
-  // function colorAccent() {
-    // let clrAccent = metaAccentClr.content;
-    // metaAccentClr.content = `hsl(${day}0deg, 100%, 45%)`
-    // root.style.setProperty('--clr-accent', clrAccent);
-  // }
-  // colorAccent()
-
-  // setInterval(colorAccent, 60000); // 1min
 
   let clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
@@ -39,8 +28,7 @@
     speed : loader.dataset.speed,
     duration : loader.dataset.duration,
     delay: loader.dataset.delay,
-    color: "--clr-accent"    
-    // color:  clrAccent   
+    color: "--clr-accent"
   } 
 
   let startValue = 0,
@@ -193,7 +181,6 @@
 
 
   heroSection.addEventListener("scroll", () => {
-    colorAccent()
     scrollTop()
     scrollerScroll()
     heroImgTrans()
@@ -205,7 +192,6 @@
     scrollTop()
     heroScrollY()
 
-    colorAccent()
     headerNavigation()
     scrollerScroll()
     heroImgTrans()
@@ -308,7 +294,6 @@
   askQuestion()
 
   window.addEventListener("scroll", () => {
-    colorAccent()
     scrollerScroll()
 
     heroImgTrans()
@@ -316,29 +301,6 @@
     textRevelOnscroll()
   })
 
-
-  // a onclick="smoothScroll('idName'); return false"
-  // let scrollMargin = 0,
-  // scrollDestination = 0,
-  // scrollSpeed = 5,
-  // scrollTime
-
-  // function smoothScroll(scrollContentId) {
-  //   scrollDestination = document.getElementById(scrollContentId).offsetTop;
-
-  //   scrollTime = setTimeout(function() {
-  //     smoothScroll(scrollContentId)
-  //   }, 1)
-
-  //   scrollMargin += scrollSpeed
-
-  //   if(scrollMargin >= scrollDestination){
-  //     clearTimeout(scrollTime)
-  //   }
-
-  //   window.scroll(0, scrollMargin)
-
-  // }
 
             
 
