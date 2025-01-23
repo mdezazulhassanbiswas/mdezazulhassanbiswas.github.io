@@ -266,14 +266,14 @@ input[type="reset"]
 .primary-btn
 {
   color: white;
-  background: var(--clr-accent, blue);
-  border: 1px solid var(--clr-accent, blue);
+  background: var(--clr-accent);
+  border: 1px solid var(--clr-accent);
 }
 
 .secondary-btn{
-  color: var(--clr-accent, blue);
+  color: var(--clr-accent);
   background: transparent;
-  border: 1px solid var(--clr-accent, blue);
+  border: 1px solid var(--clr-accent);
 }
 
 
@@ -293,44 +293,27 @@ h1, h2, h3, h4, h5, h6{
   text-wrap: balance;
   font-weight: 500;
   margin: 0;
-  color: var(--txt-clr-100);
+  color: var(--txt-1);
 }
 
 h1{
-  font-size: 2.986rem;
-
-  /*  */
+  font: var(--h1);
   line-height: 1.4em;
 }
 h2{
-  font-size: 2.488rem;
+  font: var(--h2);
 }
 h3{
-  font-size: 2.074rem;
-}
-h4{
-  font-size: 1.728rem;
-}
-h5{
-  font-size: 1.44rem;
-}
-h6{
-  font-size: 1.2rem;
+  font: var(--h3);
 }
 p{
-  font-size: 1rem;
+  font: var(--p);
   line-height: 1.4em;
   text-wrap: pretty;
 
   display: inline;
   max-width: 60ch;
-  color: var(--txt-clr-0);
-}
-.txt-md{
-  font-size: 0.833rem;
-}
-.txt-sm{
-  font-size: 0.694rem;
+  color: var(--txt-1);
 }
 /* .highlight{
   color: var(--txt-clr-50);
@@ -338,28 +321,28 @@ p{
 /* =============/font style end =========== */
 
 /* surface & txt colors ======================= */
-.surface-0{
-  background: var(--surface-0);
+.bg-0{
+  background: var(--bg-0);
 }
-.surface-1{
-  background: var(--surface-1);
+.bg-1{
+  background: var(--bg-1);
 }
-.surface-2{
-  background: var(--surface-2);
+.bg-2{
+  background: var(--bg-2);
 }
-.surface-3{
-  background: var(--surface-3);
+.bg-3{
+  background: var(--bg-3);
 }
-.surface-4{
-  background: var(--surface-4);
+.bg-4{
+  background: var(--bg-4);
 }
 
 /* surface accent */
-.surface-accent{
+.bg-accent{
   color-scheme: dark;
   background: var(--clr-accent, blue);
   color: white;
-}.surface-accent * {color: white;}
+}.bg-accent * {color: white;}
 
 /* accent txt */
 .txt-accent{
