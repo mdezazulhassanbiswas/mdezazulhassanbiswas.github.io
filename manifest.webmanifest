@@ -3,16 +3,16 @@
     "name": "Web Developer | Md Ezazul Hassan Biswas",  
     "icons": [
       {
-        "src": "https://drive.google.com/file/d/1GDfeOQOUWJCt6MFGiyvNtEpZXy5Ikyt-/view?usp=drivesdk",
+        "src": "https://drive.google.com/file/d/11lgbfWqD6xDodXcTMN9za5gwCtnkjCij/view?usp=drivesdk",
         "type": "image/svg",
         "sizes": "192x192"
       },
       {
-        "src": "https://drive.google.com/file/d/1GDfeOQOUWJCt6MFGiyvNtEpZXy5Ikyt-/view?usp=drivesdk",
+        "src": "https://drive.google.com/file/d/11kAdid3pxPtEVM8MSwJ4CZQZbEaWOUgZ/view?usp=drivesdk",
         "type": "image/svg",
         "sizes": "512x512"
       }
     ],
     "start_url": "/",
-    "display": "fullscreen"
+    "display": "standalone"
   }
