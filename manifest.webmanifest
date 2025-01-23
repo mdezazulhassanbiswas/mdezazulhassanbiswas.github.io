@@ -4,17 +4,18 @@
     "icons": [
       {
         "src": "https://drive.google.com/file/d/11lgbfWqD6xDodXcTMN9za5gwCtnkjCij/view?usp=drivesdk",
-        "type": "image/svg",
+        "type": "image/png",
         "sizes": "192x192"
       },
       {
         "src": "https://drive.google.com/file/d/11kAdid3pxPtEVM8MSwJ4CZQZbEaWOUgZ/view?usp=drivesdk",
-        "type": "image/svg",
+        "type": "image/png",
         "sizes": "512x512"
       }
     ],
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#000000"
+    "theme_color": "#000000",
+    "version": "0"
   }
