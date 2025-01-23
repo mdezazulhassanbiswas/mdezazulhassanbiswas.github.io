@@ -9,7 +9,7 @@
   margin: min(.5em, 8%);
   border-radius: .5em;
 
-  &:hover{
+  &:is(:hover, :focus-visible){
     background: color-mix(in hsl, var(--new-style) , white 30%);
   }
 }
@@ -18,12 +18,21 @@
   color-scheme: light dark;
 
   /* ========= clr primary ============= */
-  --accent-clr: hsl(192, 64%, 52%);
+  --clr-accent: hsl(192, 64%, 50%);
   --clr-1: hsl(5, 99%, 65%);
   --clr-2: hsl(182, 100%, 40%);
   --clr-3: hsl(264, 100%, 62%);
   --clr-4: hsl(150, 100%, 50%); /* springgreen */
   --clr-5: hsl(16, 100%, 50%); /* orangered */
+
+  --ff: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --h1: bold 3.375rem/4rem var(--ff);
+  --h2: bold 2.25rem/2.25rem var(--ff);
+  --h3: bold 1.5rem/1.875rem var(--ff);
+  --p: 1.125rem/1.875rem var(--ff);
+  --subtext: 0.75rem/1.25rem var(--ff);
+
+  --shadow: 0em 0em .5em 0px var(--clr-accent);
 
   /* transform-z */
   --tranform-z-0: 0px;
@@ -35,7 +44,6 @@
 
   --gap: clamp(8%, 0.5em, 2em);
   --padding: clamp(8%, 0.5em, 2em);
-
   /* breakout 85, content 90 padd 2rem */
   --content-page-max-width: 120ch;
 
@@ -51,13 +59,13 @@
     --txt-2: hsl(0, 0%, 15%);
     --txt-3: hsl(0, 0%, 30%);
 
-    --bg-1: hsl(0 0% 100% / 1);
-    --bg-2: hsl(0 0% 90% / 1);
-    --bg-3: hsl(0 0% 80% / 1);
-    --bg-4: hsl(0 0% 70% / 1);
-
+    --bg-1: hsl(from var(--clr-accent) h s calc(l + 50) / .9);
+    --bg-2: hsl(from var(--clr-accent) h s calc(l + 40) / .9);
+    --bg-3: hsl(from var(--clr-accent) h s calc(l + 30) / .9);
+    --bg-4: hsl(from var(--clr-accent) h s calc(l + 20) / .9);
 
     --bg: hsl(from var(--clr-accent) calc(h + 100) s l / .5);
+    --background: color-mix(in hsl, var(--clr-accent) , white 30%);
   }
 }
 
@@ -67,10 +75,10 @@
     --txt-2: hsl(0, 0%, 85%);
     --txt-3: hsl(0, 0%, 70%);
 
-    --bg-1: hsl(0 0% 0% / 1);
-    --bg-2: hsl(0 0% 10% / 1);
-    --bg-3: hsl(0 0% 20% / 1);
-    --bg-4: hsl(0 0% 30% / 1);
+    --bg-1: hsl(from var(--clr-accent) h s calc(l - 50) / .9);
+    --bg-2: hsl(from var(--clr-accent) h s calc(l - 60) / .9);
+    --bg-3: hsl(from var(--clr-accent) h s calc(l - 70) / .9);
+    --bg-4: hsl(from var(--clr-accent) h s calc(l - 80) / .9);
   }
 }
 
@@ -80,34 +88,34 @@
 *::after
 {
   hanging-punctuation: first-last;
-  transition: transform var(--duration) var(--timing-function), translate var(--duration) var(--timing-function);
+  transition: transform var(--transition), translate var(--transition);
   isolation: isolate;
 }
 /* new experimental features */
-/* *:empty{
+*:empty{
   opacity: .5;
-} */
+}
 .new-glass{
   background-color: hsla(0 0% 100% / 0.5);
-
   backdrop-filter: blur(5px) contrast(50%) brightness(50%) saturate(0%);
 }
 
 /* preferes-color-shema: light ====================================================================== */
 body{
   display: grid;
+  place-content: center;
   grid-template-rows: auto 1fr auto;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: var(--txt-clr-50);
+  font: var(--p);
+  color: var(--txt-1);
 }
 
 /* ============ a ============ */
-/* a[href="#"]{
-  color: var(--clr-accent, blue);
+a[href="#"]{
+  color: var(--txt-1);
 }
 a[target="parent"]{
-  color: var(--clr-accent, blue);
-} */
+  color: var(--clr-accent);
+}
 
 /* =========== ul li ============ */
 ul:has([class], [id]){
@@ -115,10 +123,8 @@ ul:has([class], [id]){
 }
 ul > li::marker{
   /* content: '✅'; */
-  color: var(--clr-accent, blue);
+  color: var(--clr-accent);
 }
-
-
 
 /* ============= button ================ */
 button,
@@ -130,10 +136,9 @@ input[type="reset"]
   text-wrap: nowrap;
   word-spacing: 2px;
   text-align: center;
-  /* font-size: 0.833rem; */
   font-size: 1rem;
   font-weight: bold;
-  transition: all var(--duration) var(--timing-function);
+  transition: all var(--transition);
 
 
   padding: 8px 1em;
@@ -145,7 +150,7 @@ input[type="reset"]
     text-decoration: none;
   }
 
-  &:is(:hover, :focus){
+  &:is(:hover, :focus-visible){
     cursor: pointer;
   }
 }
@@ -639,7 +644,8 @@ html{
   border-radius: 100dvw;
   border: .25em solid var(--clr-accent, blue);
 }
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:is(:hover, :focus-visible)
+{
   background: var(--clr-accent, blue);
 }
 *,
@@ -1008,7 +1014,7 @@ main{
         li.question{
           border-bottom: 1px solid var(--surface-1);
 
-          &:hover{
+          &:is(:hover, :focus-visible){
             cursor: pointer;
             transform: translateX(-5px);
           }
