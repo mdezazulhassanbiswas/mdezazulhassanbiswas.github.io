@@ -39,7 +39,7 @@
     var(--clr-primary-x),
     var(--clr-primary-y)
   ); */
-  --clr-accent: orangered;
+  --clr-accent: hsl(192, 64%, 52%);
 
   --txt-clr-100: hsl(0, 0%, 0%);
   --txt-clr-50: hsl(0, 0%, 15%);
