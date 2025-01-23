@@ -157,7 +157,7 @@ img{
   filter: brightness(.9) saturate(1);
 }
 *{
-  filter: saturate(0);
+  filter: saturate(1);
 }
 
 main{
