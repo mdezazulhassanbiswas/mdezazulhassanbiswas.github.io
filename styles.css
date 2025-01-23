@@ -1,19 +1,12 @@
-/* ***************** style css style.css *********************** */
-
-
 /* border-img: sourch | scice | width | outset | repeat; */
 /* clamp(min, actuale, max); */
-/* paralax => scale calculation: 1 + ((z tran * -1) / perpec); */
-/*                    1 + ((-100 * -1) / 100; */
-
-/* 1.618 golden ratio; */
 
 .new-style{
   --new-style: blue;
   background: var(--new-style);
   font-size: 1rem;
-  padding: .5em;
-  margin: .5em;
+  padding: min(.5em, 8%);
+  margin: min(.5em, 8%);
   border-radius: .5em;
 
   &:hover{
@@ -22,87 +15,66 @@
 }
 
 :root{
-  /* user agent , first is prefered  */
   color-scheme: light dark;
 
   /* ========= clr primary ============= */
-  --clr-primary-x: springgreen;
-  --clr-primary-y: orange;
+  --accent-clr: hsl(192, 64%, 52%);
+  --clr-1: hsl(5, 99%, 65%);
+  --clr-2: hsl(182, 100%, 40%);
+  --clr-3: hsl(264, 100%, 62%);
+  --clr-4: hsl(150, 100%, 50%); /* springgreen */
+  --clr-5: hsl(16, 100%, 50%); /* orangered */
 
-  /* --primary-color: hsl(5°, 99%, 65%); */
-  /* 00c4cc */
-  /* 8b3dff */
+  /* transform-z */
+  --tranform-z-0: 0px;
+  --tranform-z-1: 10px;
+  --tranform-z-2: 20px;
+  --tranform-z-3: 30px;
+  --tranform-z-4: 40px;
+  --tranform-z-5: 50px;
 
-
-  /* --clr-accent: color-mix(
-    in hwb longer hue,
-    var(--clr-primary-x),
-    var(--clr-primary-y)
-  ); */
-  --clr-accent: hsl(192, 64%, 52%);
-
-  --txt-clr-100: hsl(0, 0%, 0%);
-  --txt-clr-50: hsl(0, 0%, 15%);
-  --txt-clr-0: hsl(0, 0%, 30%);
-
-  /* background colors */
-  --surface-0: hsl(0 0% 100% / 1);
-  --surface-1: hsl(0 0% 90% / 1);
-  --surface-2: hsl(0 0% 80% / 1);
-  --surface-3: hsl(0 0% 70% / 1);
-  --surface-4: hsl(0 0% 60% / 1);
-
-  --layer-0: 0px;
-  --layer-1: 10px;
-  --layer-2: 20px;
-  --layer-3: 30px;
-  --layer-4: 40px;
-  --layer-5: 50px;
-
-  /* --surface-clr: hsl(from var(--clr-accent) calc(h + 100) s l / .5); */
-  /* --txt-clr: hsl(from var(--clr-accent) calc(h + 100) s l / .5); */
-
-/* prefered gap */
-  --gap-step-1: .375rem;
-  --gap-step-2: .5rem;
-  --gap-step-3: 1rem;
-  --gap-step-4: 1.5rem;
-  --gap-step-5: 2rem;
-
-  /* --gap-min: .375rem; */
-  /* --gap-max: 2rem; */
-  --gap: clamp(var(--gap-min, 0rem), 1dvw + (var(--gap-min, 0rem) / 2), var(--gap-max, 2rem));
-
-  
-  /* --padding-min: .375rem; */
-  /* --padding-max: 2rem; */
-  --padding: clamp(var(--padding-min, 0rem), 1dvw + (var(--padding-min, 0rem) / 2), var(--padding-max, 2rem));
-
+  --gap: clamp(8%, 0.5em, 2em);
+  --padding: clamp(8%, 0.5em, 2em);
 
   /* breakout 85, content 90 padd 2rem */
   --content-page-max-width: 120ch;
 
-  /* transition property */
-  /* --type: all; */
-  --duration: 400ms;
-  --delay: 0ms;
-  --timing-function: cubic-bezier(.47,1.64,.41,.8);
-  /* --count: 1; */
-  --fill-mode: forward;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --txt-clr-100: hsl(0, 0%, 100%);
-    --txt-clr-50: hsl(0, 0%, 85%);
-    --txt-clr-0: hsl(0, 0%, 70%);
+  --transition: 400ms cubic-bezier(.47,1.64,.41,.8);
 
-    --surface-0: hsl(0 0% 0% / 1);
-    --surface-1: hsl(0 0% 10% / 1);
-    --surface-2: hsl(0 0% 20% / 1);
-    --surface-3: hsl(0 0% 30% / 1);
-    --surface-4: hsl(0 0% 40% / 1);
+/* paralax => scale calculation: 1 + ((z tran * -1) / perpec); */
+  --paralax-scale: calc(1 + ((var(--tranform-z) * -1) / var(--perspective)));
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --txt-1: hsl(0, 0%, 0%);
+    --txt-2: hsl(0, 0%, 15%);
+    --txt-3: hsl(0, 0%, 30%);
+
+    --bg-1: hsl(0 0% 100% / 1);
+    --bg-2: hsl(0 0% 90% / 1);
+    --bg-3: hsl(0 0% 80% / 1);
+    --bg-4: hsl(0 0% 70% / 1);
+
+
+    --bg: hsl(from var(--clr-accent) calc(h + 100) s l / .5);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --txt-1: hsl(0, 0%, 100%);
+    --txt-2: hsl(0, 0%, 85%);
+    --txt-3: hsl(0, 0%, 70%);
+
+    --bg-1: hsl(0 0% 0% / 1);
+    --bg-2: hsl(0 0% 10% / 1);
+    --bg-3: hsl(0 0% 20% / 1);
+    --bg-4: hsl(0 0% 30% / 1);
+  }
+}
+
+
 *,
 *::before,
 *::after

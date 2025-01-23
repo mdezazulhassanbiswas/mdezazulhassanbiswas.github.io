@@ -1,24 +1,10 @@
   const root = document.documentElement,
   head = document.head,
   body = document.body;
-  let metaAccentClr = document.querySelector("meta[name='theme-color']")
 
-  // += scrollY
-
-  const images = document.querySelectorAll('img');
-  images.forEach(image => {
-    image.setAttribute('loading', 'lazy')
-    image.setAttribute('draggable', 'false')
-  })
-
-  const date = new Date(),
-  hour = date.getHours(),
-  minutes = date.getMinutes(),
-  day = date.getDate();
-
-  let clrAccent = metaAccentClr.content;
+  let metaAccentClr = document.querySelector("meta[name='theme-color']"),
+  clrAccent = metaAccentClr.content;
   root.style.setProperty('--clr-accent', clrAccent);
-
 
   // loder
   let loader = document.getElementById("loader"),
@@ -29,7 +15,7 @@
     duration : loader.dataset.duration,
     delay: loader.dataset.delay,
     color: "--clr-accent"
-  } 
+  }
 
   let startValue = 0,
   endValue = loaderSetting.duration;
@@ -37,8 +23,6 @@
   let progress = setInterval(() => {
     startValue++;
 
-    // background: conic-gradient(red 3.6deg, white 0deg)
-    // backGround.style.background = `conic-gradient(var(${loaderSetting.color}) ${startValue * 3.6}deg, transparent 0deg)`
     backGround.animate({
       background : `conic-gradient(var(${loaderSetting.color}) ${startValue * 3.6}deg, transparent 0deg)`
     }, {duration: "auto", fill: "forwards", delay: loaderSetting.delay})
@@ -49,6 +33,20 @@
     }
   }, loaderSetting.speed)
 
+
+  const date = new Date(),
+  day = date.getDate(),
+  hour = date.getHours(),
+  minutes = date.getMinutes();
+
+
+  // += scrollY
+
+  const images = document.querySelectorAll('img');
+  images.forEach(image => {
+    image.setAttribute('loading', 'lazy')
+    image.setAttribute('draggable', 'false')
+  })
 
   const headerSection = document.getElementById("header");
   const nav = document.getElementById("nav")
@@ -91,7 +89,6 @@
   }
   headerNavigation()
    
-
   let heroSection = document.getElementById("hero"),
   scroller = document.getElementById("scroller"),
   getScrollerScrollWidth = document.getElementById("get-scroller-scroll-width")
