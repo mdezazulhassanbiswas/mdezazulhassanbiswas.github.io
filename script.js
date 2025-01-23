@@ -90,56 +90,7 @@
     })
   }
   headerNavigation()
-
-  // custom cursor
-  const customCursor = document.getElementById("custom-cursor")
-  const customCursorTwo = document.getElementById("custom-cursor-two")
-
-  
-
-  window.addEventListener("pointermove", function CustomCursor(e) {
-    let cursorRect = customCursor.getBoundingClientRect()
-    let cursorRectTwo = customCursorTwo.getBoundingClientRect()
-    let customCursorSetting = {
-      duration: 2000,
-      width: cursorRect.width,
-      height: cursorRect.height,
-      xPosition: 0,
-      yPosition: 0
-    }
-    let customCursorTwoSetting = {
-      duration: 1400,
-      width: cursorRectTwo.width,
-      height: cursorRectTwo.height,
-      xPosition: 0,
-      yPosition: 0
-    }
-
-    customCursorSetting.xPosition += e.pageX - (customCursorSetting.width / 2)
-    customCursorSetting.yPosition += e.pageY - (customCursorSetting.height / 2)
    
-    customCursorTwoSetting.xPosition += e.pageX - (customCursorSetting.width / 2)
-    customCursorTwoSetting.yPosition += e.pageY - (customCursorSetting.height / 2)
-
-    customCursor.animate({
-      transform : `translateX(${customCursorSetting.xPosition}px) translateY(${customCursorSetting.yPosition}px)`
-    }, {duration: customCursorSetting.duration, fill: "forwards"})
-    
-    customCursorTwo.animate({
-      transform : `translateX(${customCursorTwoSetting.xPosition}px) translateY(${customCursorTwoSetting.yPosition}px)`
-    }, {duration: customCursorTwoSetting.duration, fill: "forwards"})
-
-    let els = document.querySelectorAll("h1, li, a, button")
-    els.forEach(el => {
-      el.addEventListener("pointermove", () => {
-        customCursor.style = `width: ${4 * 11}px; height: ${4 * 11}px;`  
-      })
-      el.addEventListener("pointerleave", () => {
-        customCursor.style = `width: ${2 * 11}px; height: ${2 * 11}px;`  
-      })
-    })
-  })
-
 
   let heroSection = document.getElementById("hero"),
   scroller = document.getElementById("scroller"),
