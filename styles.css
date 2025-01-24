@@ -18,7 +18,7 @@
   color-scheme: light dark;
 
   /* ========= clr primary ============= */
-  --clr-accent: hsl(150, 100%, 50%); /* springgreen */
+  --clr-accent: hsl(150, 100%, 50%); /* springgreen #00FF7F */
   --clr-1: hsl(5, 99%, 65%);
   --clr-2: hsl(182, 100%, 40%);
   --clr-3: hsl(264, 100%, 62%);
