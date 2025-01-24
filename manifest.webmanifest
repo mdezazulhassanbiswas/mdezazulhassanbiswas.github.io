@@ -3,12 +3,12 @@
     "name": "Web Designer & Front-End Developer | Md Ezazul Hassan Biswas",  
     "icons": [
       {
-        "src": "https://drive.google.com/file/d/12NjVdO0oLoqfCF-p6XwAYln81PFQCqR2/view?usp=drivesdk",
+        "src": "/assets/images/accent-transparent.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "https://drive.google.com/file/d/12MoDe-gOhWYTPCC1mmB7s6aAbLNZGdIZ/view?usp=drivesdk",
+        "src": "/assets/images/accent-transparent-bg.png",
         "type": "image/png",
         "sizes": "512x512"
       }
