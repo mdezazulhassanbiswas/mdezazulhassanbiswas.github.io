@@ -59,10 +59,10 @@
     --txt-2: hsl(0, 0%, 15%);
     --txt-3: hsl(0, 0%, 30%);
 
-    --bg-1: hsl(from var(--clr-accent) h s calc(l + 50) / .9);
-    --bg-2: hsl(from var(--clr-accent) h s calc(l + 40) / .9);
-    --bg-3: hsl(from var(--clr-accent) h s calc(l + 30) / .9);
-    --bg-4: hsl(from var(--clr-accent) h s calc(l + 20) / .9);
+    --bg-1: hsl(from var(--clr-accent) h s calc(l + 50) / 1); /* opacity 1 */
+    --bg-2: hsl(from var(--clr-accent) h s calc(l + 40) / 1);
+    --bg-3: hsl(from var(--clr-accent) h s calc(l + 30) / 1);
+    --bg-4: hsl(from var(--clr-accent) h s calc(l + 20) / 1);
 
     --bg: hsl(from var(--clr-accent) calc(h + 100) s l / .5);
     --background: color-mix(in hsl, var(--clr-accent) , white 30%);
@@ -75,10 +75,10 @@
     --txt-2: hsl(0, 0%, 85%);
     --txt-3: hsl(0, 0%, 70%);
 
-    --bg-1: hsl(from var(--clr-accent) h s calc(l - 50) / .9);
-    --bg-2: hsl(from var(--clr-accent) h s calc(l - 60) / .9);
-    --bg-3: hsl(from var(--clr-accent) h s calc(l - 70) / .9);
-    --bg-4: hsl(from var(--clr-accent) h s calc(l - 80) / .9);
+    --bg-1: hsl(from var(--clr-accent) h s calc(l - 50) / 1);
+    --bg-2: hsl(from var(--clr-accent) h s calc(l - 60) / 1);
+    --bg-3: hsl(from var(--clr-accent) h s calc(l - 70) / 1);
+    --bg-4: hsl(from var(--clr-accent) h s calc(l - 80) / 1);
   }
 }
 
@@ -107,13 +107,13 @@ html{
   margin-block: .5em;
 }
 ::-webkit-scrollbar-thumb{
-  background: var(--clr-accent, blue);
+  background: var(--clr-accent);
   border-radius: 100dvw;
-  border: .25em solid var(--clr-accent, blue);
+  border: .25em solid var(--clr-accent);
 }
 ::-webkit-scrollbar-thumb:is(:hover, :focus-visible)
 {
-  background: var(--clr-accent, blue);
+  background: var(--clr-accent);
 }
 
 *,
@@ -123,9 +123,9 @@ html{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-accent-color: var(--clr-accent, blue);
-  accent-color: var(--clr-accent, blue);
-  caret-color: var(--clr-accent, blue);
+  -webkit-accent-color: var(--clr-accent);
+  accent-color: var(--clr-accent);
+  caret-color: var(--clr-accent);
 }
 
 a{
@@ -340,14 +340,14 @@ p{
 /* surface accent */
 .bg-accent{
   color-scheme: dark;
-  background: var(--clr-accent, blue);
+  background: var(--clr-accent);
   color: white;
 }.bg-accent * {color: white;}
 
 /* accent txt */
 .txt-accent{
-  color: var(--clr-accent, blue);
-}.txt-accent * {color: var(--clr-accent, blue);}
+  color: var(--clr-accent);
+}.txt-accent * {color: var(--clr-accent);}
 
 /* main */
 main{
@@ -415,8 +415,8 @@ main > *{
   color-scheme: dark;
 
   color: white;
-  background: var(--clr-accent, blue);
-  box-shadow: 0 0 0 100vmax var(--clr-accent, blue);
+  background: var(--clr-accent);
+  box-shadow: 0 0 0 100vmax var(--clr-accent);
   clip-path: inset(0 -100vmax);
 }
 /* full page inverse background color */
@@ -588,8 +588,8 @@ main > *{
 /* background linear gradient color */
 .surface-linear-gradient{
   --direction: to top;
-  --clr-1: var(--clr-accent, blue);
-  --clr-2: var(--clr-accent, white);
+  --clr-1: var(--clr-accent);
+  --clr-2: var(--clr-accent);
 
   background: linear-gradient(
     var(--direction),
@@ -601,8 +601,8 @@ main > *{
 .txt-clip
 {
   --direction: to right;
-  --clr-1: var(--clr-accent, blue);
-  --clr-2: var(--clr-accent, white);
+  --clr-1: var(--clr-accent);
+  --clr-2: var(--clr-accent);
 
   background: linear-gradient(
     var(--direction),
@@ -612,7 +612,7 @@ main > *{
   );
 
   color: transparent;
-  -webkit-text-stroke: 1px var(--clr-accent, blue);
+  -webkit-text-stroke: 1px var(--clr-accent);
   -webkit-background-clip: text;
   background-clip: text;
 }
