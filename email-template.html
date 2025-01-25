@@ -59,8 +59,8 @@
             }
             img{
                 object-fit: scale-down;
-                width: 100%;
-                height: auto;
+                display: block;
+                max-width: 100%;
             }
 
             #email-container{
@@ -78,16 +78,16 @@
 
                 .banner{
                     background: var(--clr-accent);
-                    border-radius: 2em;
+                    border-radius: 1em;
                     height: min(15rem, 100%);
                     overflow: hidden;
                     width: min(60rem, 100%);
 
                     img{
-                        border-radius: 2em;
-                        aspect-ratio: 16/9;
+                        border-radius: 1em;
                         object-position: center;
                         object-fit: scale-down;
+                        height: 100%;
                     }
                 }
                 .email-wrapper{
