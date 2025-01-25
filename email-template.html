@@ -33,7 +33,7 @@
             display: grid;
             grid-auto-flow: row;
             width: 100dvw;
-            background: color-mix(in hsl, var(--clr-accent) 50%, transparent 50% 0.5);
+            background: color-mix(in hsl, var(--clr-accent) 60%, transparent 40% 0.5);
             padding: 2em;
         }
 
@@ -97,11 +97,9 @@
                         list-style: none;
                     
                         li{
-
-                            i{width: 2em;}
-
                             a{
                             text-decoration: none;
+                            width: 2em;
 
                                 &:is(:hover, :focus-visible){
                                     text-decoration: underline;
@@ -110,6 +108,12 @@
                         }
                         
                     }
+                }
+
+                .flex:has(.icon){
+                    display: flex;
+                    place-content: center;
+                    gap: min(2em, 8%);
                 }
 
                 hr{
