@@ -33,7 +33,7 @@
             display: grid;
             grid-auto-flow: row;
             width: 100dvw;
-            background: color-mix(in hsl, var(--clr-accent) 50%, transparent 50% 0.5);
+            background: color-mix(in hsl, var(--clr-accent) 50%, transparent 50% 0.2);
             padding: 2em;
         }
 
@@ -88,7 +88,7 @@
                                 width: 5rem;
                                 border-radius: 50%;
                                 object-fit: scale-down;
-                                vertical-align: baseline;
+                                justify-self: center;
                             }
                         }
                     }
@@ -119,19 +119,19 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    gap: min(2em, 8%);
+                    gap: min(2em, 10%);
                     width: 100%;
                     flex-wrap: wrap;
 
                     button{
                         background: var(--clr-accent);
                         border: 0px;
-                        padding: min(1em, 8%);
+                        padding: min(1em, 10%);
                         color: white;
-                        border-radius: .175em;
-                        flex-grow: 1;
+                        border-radius: .75em;
+                        flex: 1;
                         flex-basis: 26rem;
-                        gap: min(1em, 8%);
+                        gap: min(1em, 10%);
 
                         *, a{
                             color: inherit;
