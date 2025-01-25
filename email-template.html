@@ -28,25 +28,30 @@
             caret-color: var(--clr-accent);
         }
         body{
-            font-family: Arial, sans-serif; line-height: 1.6;
-        }
-        #email-container{
-            /* height: min-content; */
-            width: 100dvw;
-            height: 100dvh;
+            font-family: var(--ff);
+            line-height: 1.6;
 
-            display: grid;
-            justify-content: center;
-            grid-template-rows: auto 1fr auto;
+            #email-container{
+                /* height: min-content; */
+                width: 100dvw;
+                height: 100dvh;
 
-            img{
-                aspect-ratio: 16/9;
-                object-fit: scale-down;
-                display: block;
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                object-position: top center;
+                display: grid;
+                justify-content: center;
+                grid-template-rows: auto 1fr auto;
+
+                .banner{
+                    
+                    img{
+                        aspect-ratio: 16/9;
+                        object-fit: scale-down;
+                        display: block;
+                        width: 100%;
+                        max-width: 100%;
+                        height: auto;
+                        object-position: top center;
+                    }
+                }
             }
         }
     </style>
