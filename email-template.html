@@ -28,8 +28,7 @@
             caret-color: var(--clr-accent);
         }
         body{
-            font: var(--ff);
-            /* line-height: 1.6; */
+            font: var(--subtext);
 
             h1{
                 font: var(--h1);
@@ -48,20 +47,16 @@
             }
             img{
                 object-fit: scale-down;
-                display: block;
-                max-width: 100%;
                 width: 100%;
                 height: auto;
             }
 
-
             #email-container{
-                /* height: min-content; */
+                height: min-content;
                 width: 100dvw;
-                height: 100dvh;
-
                 display: grid;
                 justify-content: center;
+                align-items: flex-start;
                 grid-auto-rows: auto;
 
                 .regards{
@@ -69,18 +64,18 @@
                 }
 
                 .banner{
+                    background: var(--clr-accent);
 
                     img{
                         aspect-ratio: 16/9;
                         object-position: center;
                         height: min(16rem, 100%);
-                        box-shadow: inset 1000vw 0px var(--clr-accent);
                     }
                 }
                 .email-wrapper{
 
                     img.user-photo{
-                        width: 7rem;
+                        width: min(6rem, 100%);
                         border-radius: 50%;
                     }
                 }
