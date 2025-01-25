@@ -62,7 +62,6 @@
             #email-container{
                 height: min-content;
                 width: 100dvw;
-                max-width: 85ch;
                 display: grid;
                 justify-content: center;
                 align-items: flex-start;
@@ -75,12 +74,13 @@
 
                 .banner{
                     background: var(--clr-accent);
-                    aspect-ratio: 16/9;
-                    border-radius: 2rem;
+                    border-radius: 2em;
                     height: min(13rem, 100%);
                     overflow-x: hidden;
+                    max-width: 90ch;
 
                     img{
+                        border-radius: 2em;
                         aspect-ratio: 16/9;
                         object-position: center;
                         /* height: min(13rem, 100%); */
