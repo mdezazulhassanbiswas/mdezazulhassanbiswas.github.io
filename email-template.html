@@ -78,6 +78,13 @@
                         }
                     }
 
+                    .center-content{
+                        display: grid;
+                        grid-auto-flow: row;
+                        place-content: center;
+                        text-align: center;
+                    }
+
                     img.user-photo{
                         width: 5rem;
                         border-radius: 50%;
@@ -137,11 +144,12 @@
             <section class="banner">
                 <img src="/assets/images/banner-light-accent.png" alt="">
             </section>
-            <img class="user-photo" src="/assets/images/favicons/mdezazulhassanbiswas-favicon.png" alt="Web Designer & Front-End Developer | Md Ezazul Hassan Biswas">
-            <h3>MD EZAZUL HASSAN BISWAS</h3>
-            <b>Web Designer & Front-End Developer</b>
-            <p>Md Ezazul Hassan Biswas is a skilled web designer and front-end developer. Specializing in responsive and user-friendly websites.</p>
-            
+            <div class="center-content">
+                <img class="user-photo" src="/assets/images/favicons/mdezazulhassanbiswas-favicon.png" alt="Web Designer & Front-End Developer | Md Ezazul Hassan Biswas">
+                <h3>MD EZAZUL HASSAN BISWAS</h3>
+                <b>Web Designer & Front-End Developer</b>
+                <p>Md Ezazul Hassan Biswas is a skilled web designer and front-end developer. Specializing in responsive and user-friendly websites.</p>    
+            </div>
             <ul>
                 <li><a href=""><i class="fa-solid fa-location-dot"></i> Monirampur, Jessore, Khulna, Bangladesh</a></li>
                 <li><a href="mailto:mdezazulhassanbiswas@gmail.com"><i class="fa-solid fa-envelope"></i> mdezazulhassanbiswas@gmail.com</a></li>
