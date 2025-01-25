@@ -85,7 +85,7 @@
                                 width: 5rem;
                                 border-radius: 50%;
                                 object-fit: scale-down;
-                                vertical-align: baseline;
+                                align-self: center;
                             }
                         }
                     }
@@ -96,10 +96,13 @@
                         li{
                             a{
                             text-decoration: none;
-                            width: 4em;
 
                                 &:is(:hover, :focus-visible){
                                     text-decoration: underline;
+                                }
+
+                                i{
+                                    width: 4em;
                                 }
                             }
                         }
