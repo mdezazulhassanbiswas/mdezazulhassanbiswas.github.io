@@ -110,10 +110,16 @@
 
                     .button{
                         background: var(--clr-accent);
+                        border: 0px;
                         padding: .5em;
                         color: white;
                         border-radius: .125em;
-                        flex: 1 1 30rem;
+                        flex-grow: 1;
+                        flex-basis: 30rem;
+
+                        *{
+                            color: white;
+                        }
                     }
                 }
             }
