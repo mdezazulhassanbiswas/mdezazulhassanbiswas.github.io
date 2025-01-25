@@ -38,7 +38,8 @@
             align-items: flex-start;
             justify-content: center;
             font: var(--p);
-            background: color-mix(in hsl, var(--clr-accent) , white 60%);
+            position: relative;
+            width: 100dvw;
 
             h1{
                 font: var(--h1);
@@ -60,7 +61,8 @@
             }
 
             #email-container{
-                width: 100dvw;
+                width: min(58rem, 100%);
+                margin-inline: auto;
                 /* height: 100dvh; */
                 display: grid;
                 grid-auto-flow: row;
