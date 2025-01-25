@@ -33,7 +33,7 @@
             display: grid;
             grid-auto-flow: row;
             width: 100dvw;
-            background: color-mix(in hsl, var(--clr-accent) 50%, transparent 50% 0.2);
+            background: color-mix(in hsl, var(--clr-accent) 50%, transparent 50% 0.5);
             padding: 2em;
         }
 
@@ -88,7 +88,7 @@
                                 width: 5rem;
                                 border-radius: 50%;
                                 object-fit: scale-down;
-                                justify-self: center;
+                                vertical-align: baseline;
                             }
                         }
                     }
@@ -103,11 +103,12 @@
                             a{
                             text-decoration: none;
 
-                            &:is(:hover, :focus-visible){
-                                text-decoration: underline;
+                                &:is(:hover, :focus-visible){
+                                    text-decoration: underline;
+                                }
                             }
                         }
-                        }
+                        
                     }
                 }
 
@@ -119,17 +120,16 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    gap: min(2em, 10%);
+                    gap: min(2em, 8%);
                     width: 100%;
                     flex-wrap: wrap;
 
                     button{
-                        background: var(--clr-accent);
-                        border: 0px;
+                        border: 0.5em solid var(--clr-accent);
                         padding: min(1em, 10%);
-                        color: white;
-                        border-radius: .75em;
-                        flex: 1;
+                        color: var(--clr-accent);
+                        border-radius: .5em;
+                        flex-grow: 1;
                         flex-basis: 26rem;
                         gap: min(1em, 10%);
 
