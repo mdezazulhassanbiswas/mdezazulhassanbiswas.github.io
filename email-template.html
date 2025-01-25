@@ -66,27 +66,19 @@
 
             #email-container{
                 width: 100dvw;
-                height: 100dvh;
+                /* height: 100dvh; */
                 display: grid;
                 grid-auto-flow: row;
                 grid-auto-rows: auto;
                 justify-content: center;
                 align-items: flex-start;
-                gap: 2em;
-
-                >*{
-                    border: 1px dotted black;
-                }
-
-                .regards{
-                    height: min-content;
-                }
+                gap: 1em;
+                margin-block: 1em;
 
                 .banner{
                     background: var(--clr-accent);
                     border-radius: 1em;
                     height: min(12rem, 100%);
-                    overflow: hidden;
                     width: min(46rem, 100%);
                     /* display: grid; */
 
@@ -100,15 +92,14 @@
                 }
                 .email-wrapper{
                     display: grid;
-                    grid-auto-rows: auto;
+                    grid-auto-flow: row;
                     align-items: flex-start;
                     justify-content: center;
 
                     img.user-photo{
                         width: min(8rem, 100%);
                         border-radius: 50%;
-                        background: var(--clr-accent);
-                        border: 1px solid red;
+                        background: white;
                     }
                 }
 
