@@ -94,12 +94,17 @@
                     ul{
                         list-style: none;
                     
-                        li a{
+                        li{
+
+                            i{width: 2em;}
+                            
+                            a{
                             text-decoration: none;
 
                             &:is(:hover, :focus-visible){
                                 text-decoration: underline;
                             }
+                        }
                         }
                     }
                 }
@@ -112,18 +117,18 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    gap: 2em;
+                    gap: min(2em, 5%);
                     width: 100%;
 
                     button{
                         background: var(--clr-accent);
                         border: 0px;
-                        padding: .5em;
+                        padding: 0.5em;
                         color: white;
                         border-radius: .175em;
                         flex-grow: 1;
                         flex-basis: 30rem;
-                        gap: .5em;
+                        gap: 0.5em;
 
                         *, a{
                             color: inherit;
