@@ -18,20 +18,42 @@
         body{
             font-family: Arial, sans-serif; line-height: 1.6;
         }
+        #email-container{
+            /* height: min-content; */
+            width: 100dvw;
+            height: 100dvh;
+
+            display: grid;
+            justify-content: center;
+            grid-template-rows: auto 1fr auto;
+
+            img{
+                aspect-ratio: 9/16;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="-email-container">
-        <div class="wrapper"></div> <!-- banner -->
-        <p>Best Regards,</p>
-        <p><strong>MD EZAZUL HASSAN BISWAS</strong><br>
-        Web Designer & Front-End Developer</p>
-        <p>Md Ezazul Hassan Biswas is a skilled web designer and front-end developer. Specializing in responsive and user-friendly websites.</p>
-        <p>Location: Monirampur, Jessore, Khulna, Bangladesh<br>
-        Mail: <a href="mailto:mdezazulhassanbiswas@gmail.com">mdezazulhassanbiswas@gmail.com</a><br>
-        Phone: <a href="tel:+8801602873384">+8801602873384</a><br>
-        Website: <a href="https://mdezazulhassanbiswas.github.io" target="_blank">mdezazulhassanbiswas.github.io</a></p>
-        <p><strong>Google Meet</strong></p>
+    <div id="email-container">
+        <section class="regards">
+            <p>Best Regards,</p>
+        </section>
+
+        <section class="banner">
+            <img src="/assets/images/banner-light-accent.png" alt="">
+        </section> <!-- banner -->
+
+        <section class="wrapper">
+            <img class="user-photo" src="/assets/images/favicons/mdezazulhassanbiswas.logo.svg" alt="Web Designer & Front-End Developer | Md Ezazul Hassan Biswas">
+            <p><strong>MD EZAZUL HASSAN BISWAS</strong><br>
+            Web Designer & Front-End Developer</p>
+            <p>Md Ezazul Hassan Biswas is a skilled web designer and front-end developer. Specializing in responsive and user-friendly websites.</p>
+            <p>Location: Monirampur, Jessore, Khulna, Bangladesh<br>
+            Mail: <a href="mailto:mdezazulhassanbiswas@gmail.com">mdezazulhassanbiswas@gmail.com</a><br>
+            Phone: <a href="tel:+8801602873384">+8801602873384</a><br>
+            Website: <a href="https://mdezazulhassanbiswas.github.io" target="_blank">mdezazulhassanbiswas.github.io</a></p>
+            <button><a href="https://meet.google.com/oxg-etoz-xxa" target="_blank" rel="noopener noreferrer">Google Meet</a></button>
+        </section>
     </div>
 </body>
 </html>
