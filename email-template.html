@@ -37,7 +37,7 @@
             display: grid;
             grid-auto-flow: row;
             width: 100dvw;
-            background: color-mix(in hsl, var(--clr-accent) , white 60%);
+            background: color-mix(in hsl, var(--clr-accent) , transparent 40%);
             padding: 2em;
         }
 
@@ -54,7 +54,6 @@
                 justify-content: center;
                 align-items: flex-start;
                 gap: 1em;
-                margin-block: 1em;
 
                 .email-wrapper{
                     display: grid;
@@ -64,14 +63,14 @@
 
                     .banner{
                         background: var(--clr-accent);
-                        border-radius: 1em;
+                        border-radius: .5em;
                         height: min(8rem, 50%);
                         width: min(44rem, 100%);
                         margin-inline: auto;
                         overflow: hidden;
 
                         img{
-                            border-radius: 1em;
+                            border-radius: .5em;
                             object-position: center;
                             object-fit: scale-down;
                             width: 100%;
@@ -88,13 +87,14 @@
                         .grid{
                             display: grid;
                             place-content: center;
-                        }
-                    }
 
-                    img.user-photo{
-                        width: 5rem;
-                        border-radius: 50%;
-                        object-fit: scale-down;
+                            img.user-photo{
+                                width: 5rem;
+                                border-radius: 50%;
+                                object-fit: scale-down;
+                                vertical-align: baseline;
+                            }
+                        }
                     }
 
                     ul{
