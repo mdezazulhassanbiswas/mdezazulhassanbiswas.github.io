@@ -79,11 +79,16 @@
                         }
                     }
 
-                    .center-content{
+                    .centainer-content{
                         display: grid;
                         grid-auto-flow: row;
                         place-content: center;
                         text-align: center;
+
+                        .grid{
+                            display: grid;
+                            place-content: center;
+                        }
                     }
 
                     img.user-photo{
@@ -152,10 +157,12 @@
             <section class="banner">
                 <img src="/assets/images/banner-light-accent.png" alt="">
             </section>
-            <div class="center-content">
-                <img class="user-photo" src="/assets/images/favicons/mdezazulhassanbiswas-favicon.png" alt="Web Designer & Front-End Developer | Md Ezazul Hassan Biswas">
-                <h3>MD EZAZUL HASSAN BISWAS</h3>
-                <b>Web Designer & Front-End Developer</b>
+            <div class="centainer-content">
+                <div class="grid">
+                    <img class="user-photo" src="/assets/images/favicons/mdezazulhassanbiswas-favicon.png" alt="Web Designer & Front-End Developer | Md Ezazul Hassan Biswas">
+                    <h3>MD EZAZUL HASSAN BISWAS</h3>
+                    <b>Web Designer & Front-End Developer</b>
+                </div>
                 <p>Md Ezazul Hassan Biswas is a skilled web designer and front-end developer. Specializing in responsive and user-friendly websites.</p>    
             </div>
             <ul>
