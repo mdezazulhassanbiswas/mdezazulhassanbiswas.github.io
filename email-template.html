@@ -104,13 +104,21 @@
                         object-fit: scale-down;
                     }
 
-                    ul li a{
-                        text-decoration: none;
+                    ul{
+                        list-style: none;
+                    
+                        li a{
+                            text-decoration: none;
 
-                        &:is(:hover, :focus-visible){
-                            text-decoration: underline;
+                            &:is(:hover, :focus-visible){
+                                text-decoration: underline;
+                            }
                         }
                     }
+                }
+
+                hr{
+                    width: 100%;
                 }
 
                 .flex:has(button){
