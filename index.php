@@ -51,7 +51,14 @@
         }
     </script>
     
-<!--     <meta name="date" content="' . $currentDate . '" scheme="YYYY-MM-DD"> -->
+    <?php
+        function updateMetaDate() {
+            $currentDate = date("Y-m-d");
+            echo '<meta name="date" content="' . $currentDate . '" scheme="YYYY-MM-DD">';
+        }                  
+        updateMetaDate()     
+    ?>
+
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWB3RK8474"></script>
