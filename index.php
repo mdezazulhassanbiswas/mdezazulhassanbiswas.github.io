@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="hsl(240, 100%, 50%)" id="meta-theme-color">
+    <meta name="theme-color" content="rgb(0, 0, 255)" id="meta-theme-color">
 
     <meta name="author" content="Md Ezazul Hassan Biswas, mdezazulhassanbiswas@gmail.com, +8801602873384">
     <meta name="keywords" content="
@@ -55,8 +55,10 @@
         function updateMetaDate() {
             $currentDate = date("Y-m-d");
             echo '<meta name="date" content="' . $currentDate . '" scheme="YYYY-MM-DD">';
-        }                  
-        updateMetaDate()     
+        }   
+    ?>
+    <?php
+        updateMetaDate()
     ?>
 
 
