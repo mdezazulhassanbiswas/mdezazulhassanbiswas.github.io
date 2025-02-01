@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden; /* Prevents banner from overflowing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .banner {
+            width: 100%;
+            height: 200px; /* Adjust as needed */
+            background-image: url('your_banner_image.jpg'); /* Replace with your banner image URL */
+            background-size: cover;
+            background-position: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-image: url('your_profile_image.jpg'); /* Replace with your profile image URL */
+            background-size: cover;
+            background-position: center;
+            margin-right: 15px;
+        }
+        .profile-info {
+          flex-grow: 1; /* Allows info to take up available space */
+        }
+        .profile-name {
+            font-weight: bold;
+            margin: 0;
+        }
+        .profile-title {
+            font-size: 14px;
+            color: #777;
+            margin: 5px 0 0;
+        }
+        .qr-code {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+        }
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .brand-logo img {
+            max-width: 200px; /* Or adjust as needed */
+        }
+        .contact-info {
+            text-align: center;
+        }
+        .contact-info a {
+          color: #007bff; /* Example link color */
+          text-decoration: none;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="banner"></div>
+
+    <div class="content">
+        <div class="profile">
+            <div class="profile-image"></div>
+            <div class="profile-info">
+                <h3 class="profile-name">Your Name</h3>
+                <p class="profile-title">Your Title/Position</p>
+            </div>
+        </div>
+
+        <div class="qr-code">
+            <img src="your_qr_code.png" alt="QR Code"> </div>
+
+        <div class="brand-logo">
+            <img src="your_logo.png" alt="Brand Logo"> </div>
+
+        <div class="contact-info">
+            <p>Email: <a href="mailto:your_email@example.com">your_email@example.com</a></p>
+            <p>Phone: Your Phone Number</p>
+            <p>Website: <a href="your_website.com">your_website.com</a></p>
+            <p>Address: Your Address</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2023 Your Company. All rights reserved.
+    </div>
+</div>
+
+</body>
+</html>
