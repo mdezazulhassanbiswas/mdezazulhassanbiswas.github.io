@@ -1,19 +1,19 @@
 {
-    "short_name": "Web Designer",  
-    "name": "Web Designer & Front-End Developer | Md Ezazul Hassan Biswas",  
-    "icons": [
-      {
-        "src": "/assets/images/brand-logo.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
-      {
-        "src": "/assets/images/brand-bg.png",
-        "type": "image/png",
-        "sizes": "512x512"
-      }
-    ],
-    "start_url": "/",
-    "display": "standalone",
-    "version": "1.0"
-  }
+  "short_name": "Web Designer",  
+  "name": "Web Designer & Front-End Developer | Md Ezazul Hassan Biswas",  
+  "icons": [
+    {
+      "src": "/assets/images/brand-logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/images/brand-bg.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "version": "1.0"
+}
