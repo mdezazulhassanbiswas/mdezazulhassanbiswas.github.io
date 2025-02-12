@@ -1,5 +1,5 @@
 /* border-img: sourch | scice | width | outset | repeat; */
-/* clamp(min, actuale, max); */
+/* clamp(min, prefered, max); */
 
 :root{
   color-scheme: light dark;
