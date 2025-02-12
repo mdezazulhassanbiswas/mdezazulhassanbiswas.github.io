@@ -1,4 +1,4 @@
-# web-designer.apk
+# Web-Designer.apk
 
 ## Overview
 This app allows user & client to stay connected with Web Designer & Front-End developer | Md Ezazul Hassan Biswas.
@@ -15,18 +15,18 @@ This app allows user & client to stay connected with Web Designer & Front-End de
 or
 2. visit https://mdezazulhassanbiswas.github.io & from your browsers menu go to cast,save,share option and install page as app.
 
-• Usage:
+## Usage:
     - Install & open the app
     - Browse products
     - Choose product
     - Contact me
 
-• Contact:
+## Contact:
     - Web: https://mdezazulhassanbiswas.github.io
     - Email: mdezazulhassanbiswas@gmail.com
     - Others: +8801602873384
 
-• Acknowledgements:
+## Acknowledgements:
     - All over the World
 
 
