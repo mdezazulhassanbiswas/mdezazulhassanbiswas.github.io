@@ -24,7 +24,7 @@ or
 
 ## Contact:
     Web: https://mdezazulhassanbiswas.github.io
-    Email: mdezazulhassanbiswas@gmail.com
+    E-mail: mdezazulhassanbiswas@gmail.com
     Others: +8801602873384
 
 ## Acknowledgements:
