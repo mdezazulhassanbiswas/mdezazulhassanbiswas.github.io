@@ -1,0 +1,20 @@
+{
+    "name": "Web Designer",
+    "version": "1.0.0",
+    "description": "A webview application that opens a specified URL and adapts to the device's color scheme.",
+    "main": "src/index.html",
+    "scripts": {
+      "start": "live-server src"
+    },
+    "dependencies": {
+      "live-server": "^1.2.1"
+    },
+    "keywords": [
+      "webview",
+      "color-scheme",
+      "dynamic",
+      "responsive"
+    ],
+    "author": "mdezazulhassanbiswas",
+    "license": "MIT"
+  }
