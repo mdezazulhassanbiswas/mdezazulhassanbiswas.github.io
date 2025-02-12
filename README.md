@@ -20,14 +20,15 @@ or
     - Browse products
     - Choose product
     - Contact me
+    - Buy product
 
 ## Contact:
-    - Web: https://mdezazulhassanbiswas.github.io
-    - Email: mdezazulhassanbiswas@gmail.com
-    - Others: +8801602873384
+    Web: https://mdezazulhassanbiswas.github.io
+    Email: mdezazulhassanbiswas@gmail.com
+    Others: +8801602873384
 
 ## Acknowledgements:
-    - All over the World
+    All over the World
 
 
 
