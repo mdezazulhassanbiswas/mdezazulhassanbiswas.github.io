@@ -1,6 +1,10 @@
-body {
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: Arial, sans-serif;
 }
 
@@ -19,11 +23,11 @@ body {
 }
 
 .light-theme {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #0000ff;
+    color: #ffffff;
 }
 
 .dark-theme {
-    background-color: #000000;
+    background-color: #0000ff;
     color: #ffffff;
 }

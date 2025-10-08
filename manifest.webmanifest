@@ -3,12 +3,12 @@
   "name": "Web Developer | Hassan Biswas",  
   "icons": [
     {
-      "src": "/assets/images/logo-light.png",
+      "src": "images/app-logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/assets/images/bg-light.png",
+      "src": "images/app-bg-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const webview = document.getElementById('webview');
     
     // Load the specified URL in the webview
-    webview.src = 'https://mdezazulhassanbiswas.github.io';
+    webview.src = 'https://mdezazulhassanbiswas.github.io/';
 
     // Function to apply the appropriate color scheme
     function applyColorScheme() {
