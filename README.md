@@ -23,9 +23,9 @@ or
     - Buy product
 
 ## Contact:
-    Web: https://mdezazulhassanbiswas.github.io/
+    Portfolio: https://mdezazulhassanbiswas.github.io/
     E-mail: mdezazulhassanbiswas@gmail.com
-    Others: +880 16028 73384
+    Whatsapp: https://wa.me/8801602873384
 
 ## Acknowledgements:
     All over the World
