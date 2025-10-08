@@ -1,7 +1,7 @@
 # Web Developer | Hassan Biswas.apk
 
 ## Overview
-This app allows user & client to stay connected with Web Designer & Front-End developer | Md Ezazul Hassan Biswas.
+This app allows user & client to stay connected with Web developer | Hassan Biswas.
 
 ## Features
 - Easier connection & access
@@ -13,7 +13,7 @@ This app allows user & client to stay connected with Web Designer & Front-End de
 ## Installation
 1. download the app from https://github.com/mdezazulhassanbiswas/mdezazulhassanbiswas.github.io/releases/
 or
-2. visit https://mdezazulhassanbiswas.github.io & from your browsers menu go to cast,save,share option and install page as app.
+2. visit https://mdezazulhassanbiswas.github.io/ & from your browsers menu go to cast,save,share option and install page as app.
 
 ## Usage:
     - Install & open the app
