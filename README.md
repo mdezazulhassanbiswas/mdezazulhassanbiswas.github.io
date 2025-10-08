@@ -1,4 +1,4 @@
-# Web-Designer.apk
+# Web Developer | Hassan Biswas.apk
 
 ## Overview
 This app allows user & client to stay connected with Web Designer & Front-End developer | Md Ezazul Hassan Biswas.
@@ -23,9 +23,9 @@ or
     - Buy product
 
 ## Contact:
-    Web: https://mdezazulhassanbiswas.github.io
+    Web: https://mdezazulhassanbiswas.github.io/
     E-mail: mdezazulhassanbiswas@gmail.com
-    Others: +8801602873384
+    Others: +880 16028 73384
 
 ## Acknowledgements:
     All over the World
