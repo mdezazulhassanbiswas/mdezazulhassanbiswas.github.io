@@ -25,7 +25,7 @@ or
 ## Contact:
     Portfolio: https://mdezazulhassanbiswas.github.io/
     E-mail: mdezazulhassanbiswas@gmail.com
-    Whatsapp: https://wa.me/8801602873384
+    Whatsapp: +880 16028 73384
 
 ## Acknowledgements:
     All over the World
