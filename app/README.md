@@ -7,9 +7,9 @@ This project is a simple webview application that opens a specified URL and dyna
 ```
 webview-app
 ├── src
-│   ├── index.html        # Main HTML file for the webview application
-│   ├── styles.css       # Styles for light and dark themes
-│   └── scripts.js       # JavaScript code for loading the webview and handling color schemes
+│── index.html        # Main HTML file for the webview application
+│── styles.css       # Styles for light and dark themes
+│── scripts.js       # JavaScript code for loading the webview and handling color schemes
 ├── package.json         # Configuration file for npm
 └── README.md            # Documentation for the project
 ```
