@@ -15,5 +15,58 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "version": "1.0.0"
+  "version": "2025.10.9.Release",
+  "theme_color": "#0000ff",
+  "background_color": "#0000ff",
+
+  "homepage": "https://mdezazulhassanbiswas.github.io",
+  "description": "Welcome to my portfolio website! I'm Hassan Biswas, a passionate web developer dedicated to crafting beautiful and functional websites. Explore my projects, skills, and get in touch to collaborate on exciting web development ventures.",
+  "orientation": "portrait",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["portfolio", "web developer", "website"],
+ 
+  "screenshots": [
+    {
+      "src": "images/screenshot1.png",
+      "type": "image/png",
+      "sizes": "640x480"
+    },
+    {
+      "src": "images/screenshot2.png",
+      "type": "image/png",
+      "sizes": "640x480"
+    }
+  ],
+
+  "iarc_rating_id": "e7f3b8c0-1d2e-4f3a-9c3e-123456789abc",
+  "developer": {
+    "name": "Web Developer | Hassan Biswas",
+    "url": "https://mdezazulhassanbiswas.github.io"
+  },
+  "shortcuts": [
+    {
+      "name": "About Me",
+      "short_name": "About",
+      "description": "Learn more about me",
+      "url": "https://mdezazulhassanbiswas.github.io/#about",
+      "icons": [{ "src": "images/about-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "My Projects",
+      "short_name": "Projects",
+      "description": "View my portfolio projects",
+      "url": "https://mdezazulhassanbiswas.github.io/#projects",
+      "icons": [{ "src": "images/projects-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact Me",
+      "short_name": "Contact",
+      "description": "Get in touch with me",
+      "url": "https://mdezazulhassanbiswas.github.io/#contact",
+      "icons": [{ "src": "images/contact-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "display_override": ["standalone", "fullscreen"]
 }
+
