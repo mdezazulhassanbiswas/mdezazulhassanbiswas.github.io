@@ -28,12 +28,17 @@
  
   "screenshots": [
     {
-      "src": "images/screenshot1.png",
+      "src": "https://mdezazulhassanbiswas.github.io/images/1.png",
       "type": "image/png",
       "sizes": "640x480"
     },
     {
       "src": "images/screenshot2.png",
+      "type": "https://mdezazulhassanbiswas.github.io/images/2.png",
+      "sizes": "640x480"
+    },
+    {
+      "src": "https://mdezazulhassanbiswas.github.io/images/3.png",
       "type": "image/png",
       "sizes": "640x480"
     }
@@ -46,25 +51,32 @@
   },
   "shortcuts": [
     {
-      "name": "About Me",
-      "short_name": "About",
-      "description": "Learn more about me",
-      "url": "https://mdezazulhassanbiswas.github.io/#about",
-      "icons": [{ "src": "images/about-icon.png", "sizes": "96x96" }]
+      "name": "Send Email",
+      "short_name": "Email",
+      "description": "Get in touch with me, send me an email",
+      "url": "mailto:mdezazulhassanbiswas@gmail.com",
+      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/mailto.png", "sizes": "96x96" }]
     },
     {
-      "name": "My Projects",
-      "short_name": "Projects",
-      "description": "View my portfolio projects",
-      "url": "https://mdezazulhassanbiswas.github.io/#projects",
-      "icons": [{ "src": "images/projects-icon.png", "sizes": "96x96" }]
+      "name": "Whatsapp Me",
+      "short_name": "Whatsapp",
+      "description": "Chat with me on Whatsapp",
+      "url": "wa.me/8801602873384",
+      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/whatsappto.png", "sizes": "96x96" }]
     },
     {
-      "name": "Contact Me",
-      "short_name": "Contact",
-      "description": "Get in touch with me",
-      "url": "https://mdezazulhassanbiswas.github.io/#contact",
-      "icons": [{ "src": "images/contact-icon.png", "sizes": "96x96" }]
+      "name": "Call Me",
+      "short_name": "Call",
+      "description": "Give me a call",
+      "url": "tel:+8801602873384",
+      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/callto.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Get Directions",
+      "short_name": "Location",
+      "description": "Find my location on Google Maps",
+      "url": "https://maps.app.goo.gl/hz2BoYYBmjRyLmEV8",
+      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/location.png", "sizes": "96x96" }]
     }
   ],
   "display_override": ["standalone", "fullscreen"]
