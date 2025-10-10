@@ -8,7 +8,7 @@ This app allows user & client to stay connected with Web developer | Hassan Bisw
 - Multiple browser support
 - Multiple devices support
 - User friendly UI
-- 24H support
+- 24/7 support
 
 ## Installation
 1. download the app from https://github.com/mdezazulhassanbiswas/mdezazulhassanbiswas.github.io/releases/
