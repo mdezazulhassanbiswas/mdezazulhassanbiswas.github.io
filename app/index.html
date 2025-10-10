@@ -5,12 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../mdezazulhassanbiswas.github.io/images/favicon-50-png.png" type="image/x-icon">
     <title>Web Developer | Hassan Biswas</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100dvh;
+            width: 100dvw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .webview {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .light-theme {
+            background-color: #0000ff;
+            color: #ffffff;
+        }
+
+        .dark-theme {
+            background-color: #0000ff;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <div id="webview-container">
         <iframe id="webview" src="https://mdezazulhassanbiswas.github.io/" frameborder="0"></iframe>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // This file contains the JavaScript code for the webview application.
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const webview = document.getElementById('webview');
+            
+            // Load the specified URL in the webview
+            webview.src = 'https://mdezazulhassanbiswas.github.io/';
+
+            // Function to apply the appropriate color scheme
+            function applyColorScheme() {
+                const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const body = document.body;
+
+                if (prefersDarkScheme) {
+                    body.classList.add('dark-theme');
+                    body.classList.remove('light-theme');
+                } else {
+                    body.classList.add('light-theme');
+                    body.classList.remove('dark-theme');
+                }
+            }
+
+            // Initial color scheme application
+            applyColorScheme();
+
+            // Listen for changes in the color scheme
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', applyColorScheme);
+        });
+
+    </script>
 </body>
 </html>
