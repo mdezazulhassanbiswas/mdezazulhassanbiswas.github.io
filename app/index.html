@@ -15,22 +15,17 @@
         box-sizing: border-box;
         }
 
+        html,body,iframe {
+            height: 100dvh;
+            width: 100dvw;
+        }
+
         body {
             font-family: Arial, sans-serif;
         }
 
-        .container {
-            height: 100dvh;
-            width: 100dvw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .webview {
-            width: 100%;
-            height: 100%;
-            border: none;
+        iframe {
+            border: 0px solid #0000ff;
         }
 
         .light-theme {
@@ -45,18 +40,12 @@
     </style>
 </head>
 <body>
-    <div id="webview-container">
-        <iframe id="webview" src="https://mdezazulhassanbiswas.github.io/" frameborder="0"></iframe>
-    </div>
+    <iframe id="webview" src="https://mdezazulhassanbiswas.github.io/" frameborder="0"></iframe>
 
     <script>
         // This file contains the JavaScript code for the webview application.
 
         document.addEventListener("DOMContentLoaded", function() {
-            const webview = document.getElementById('webview');
-            
-            // Load the specified URL in the webview
-            webview.src = 'https://mdezazulhassanbiswas.github.io/';
 
             // Function to apply the appropriate color scheme
             function applyColorScheme() {
