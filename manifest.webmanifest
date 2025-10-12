@@ -19,7 +19,7 @@
   "theme_color": "#0000ff",
   "background_color": "#0000ff",
 
-  "homepage": "https://mdezazulhassanbiswas.github.io",
+  "homepage": "https://mdezazulhassanbiswas.github.io/",
   "description": "Welcome to my portfolio website! I'm Hassan Biswas, a passionate web developer dedicated to crafting beautiful and functional websites. Explore my projects, skills, and get in touch to collaborate on exciting web development ventures.",
   "orientation": "portrait",
   "lang": "en-US",
@@ -28,17 +28,17 @@
  
   "screenshots": [
     {
-      "src": "https://mdezazulhassanbiswas.github.io/images/1.png",
+      "src": "images/1.png",
       "type": "image/png",
       "sizes": "640x480"
     },
     {
       "src": "images/screenshot2.png",
-      "type": "https://mdezazulhassanbiswas.github.io/images/2.png",
+      "type": "images/2.png",
       "sizes": "640x480"
     },
     {
-      "src": "https://mdezazulhassanbiswas.github.io/images/3.png",
+      "src": "images/3.png",
       "type": "image/png",
       "sizes": "640x480"
     }
@@ -47,7 +47,7 @@
   "iarc_rating_id": "e7f3b8c0-1d2e-4f3a-9c3e-123456789abc",
   "developer": {
     "name": "Web Developer | Hassan Biswas",
-    "url": "https://mdezazulhassanbiswas.github.io"
+    "url": "https://mdezazulhassanbiswas.github.io/"
   },
   "shortcuts": [
     {
@@ -55,28 +55,28 @@
       "short_name": "Email",
       "description": "Get in touch with me, send me an email",
       "url": "mailto:mdezazulhassanbiswas@gmail.com",
-      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/mailto.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/mailto.png", "sizes": "96x96" }]
     },
     {
       "name": "Whatsapp Me",
       "short_name": "Whatsapp",
       "description": "Chat with me on Whatsapp",
-      "url": "wa.me/8801602873384",
-      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/whatsappto.png", "sizes": "96x96" }]
+      "url": "https://wa.me/8801602873384",
+      "icons": [{ "src": "images/whatsappto.png", "sizes": "96x96" }]
     },
     {
       "name": "Call Me",
       "short_name": "Call",
       "description": "Give me a call",
       "url": "tel:+8801602873384",
-      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/callto.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/callto.png", "sizes": "96x96" }]
     },
     {
       "name": "Get Directions",
       "short_name": "Location",
       "description": "Find my location on Google Maps",
       "url": "https://maps.app.goo.gl/hz2BoYYBmjRyLmEV8",
-      "icons": [{ "src": "https://mdezazulhassanbiswas.github.io/images/location.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/location.png", "sizes": "96x96" }]
     }
   ],
   "display_override": ["standalone", "fullscreen"]
