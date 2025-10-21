@@ -1,0 +1,102 @@
+/* General Styles */
+body {
+    font-family: sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.container-fluid {
+    height: 100vh; /* Make the container take the full viewport height */
+}
+
+/* Green Theme */
+.bg-primary {
+    background-color: #4CAF50 !important; /* Primary Green */
+}
+
+.text-primary {
+    color: #4CAF50 !important;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #3e8e41; /* Darker Green on hover */
+    border-color: #3e8e41;
+}
+
+/* Drop Zone Styles */
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.drop-zone.dragover {
+    border-color: #4CAF50; /* Green border when dragging over */
+    background-color: #f0f8f0; /* Light green background when dragging over */
+}
+
+/* File List Styles */
+.file-list {
+    margin-top: 20px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    /* You'll likely use an image here for the file icon */
+}
+
+.file-name {
+    flex-grow: 1;
+}
+
+.file-size {
+    font-size: 0.8em;
+    color: #888;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #f8f9fa; /* Light gray background */
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-heading {
+    padding: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    padding: 10px;
+    color: #333;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: #eee;
+}
+
+.nav-link.active {
+    background-color: #4CAF50;
+    color: white;
+  }
