@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarmonyOS Style File Drop</title>
+    <!-- Load Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Load Inter font family and custom styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* Custom Green Theme for HarmonyOS style */
+        :root {
+            --bs-primary: #10b981; /* A vibrant Emerald Green */
+            --bs-primary-rgb: 16, 185, 129;
+        }
+        .btn-primary { background-color: var(--bs-primary); border-color: var(--bs-primary); }
+        .btn-primary:hover { background-color: #059669; border-color: #059669; }
+        .text-primary { color: var(--bs-primary) !important; }
+        .bg-primary-light { background-color: #e0f2f1; } /* Light green background */
+
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; }
+        .card { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+        /* Drag and Drop Zone Styles */
+        .drag-zone {
+            border: 3px dashed var(--bs-primary);
+            background-color: #e0f2f1;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .drag-zone.active {
+            border-color: #059669;
+            background-color: #ccfbf1;
+        }
+
+        /* File/Folder Item Styles */
+        .file-item, .folder-item, .breadcrumb-item {
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .folder-item:hover, .file-item:hover {
+            background-color: #f0fdf4; /* Very light green hover */
+        }
+    </style>
+</head>
+<body class="p-4 p-sm-5 min-vh-100 d-flex justify-content-center align-items-start">
+
+    <div class="w-100" style="max-width: 900px;">
+        <header class="text-center mb-5">
+            <h1 class="display-6 fw-bold text-gray-800 mb-2 text-primary">Super File Transfer</h1>
+            <p class="text-secondary">
+                Simulated HarmonyOS-style file system sharing. Max file size: **50 MB**.
+            </p>
+        </header>
+
+        <!-- Connection Panel -->
+        <div id="connection-panel" class="card p-4 shadow-sm mb-5">
+            <h2 class="h5 mb-3 text-secondary">1. Connect Room (Passwordless)</h2>
+            <div class="input-group">
+                <input type="text" id="roomIdInput" placeholder="Enter a unique Transfer ID (e.g., Device-A-to-B)"
+                       class="form-control p-3 border-secondary-subtle">
+                <button id="joinRoomButton" disabled
+                        class="btn btn-primary fw-bold px-4 disabled:opacity-50">
+                    Join Room
+                </button>
+            </div>
+            <p id="roomStatus" class="mt-2 form-text"></p>
+        </div>
+
+        <!-- Transfer Panel (Hidden until connected) -->
+        <div id="transfer-panel" class="d-none">
+            <!-- Upload Panel -->
+            <div class="card p-4 shadow-sm mb-5">
+                <h2 class="h5 mb-3 text-secondary">2. Upload Files & Create Folders</h2>
+
+                <!-- Drag and Drop Zone -->
+                <div id="dragDropZone" class="drag-zone p-4 text-center rounded-3 mb-3">
+                    <p class="h6 text-secondary mb-1">Drag files here to upload</p>
+                    <p class="small text-muted">Max file size: 50 MB</p>
+                    <input type="file" id="fileInput" multiple onchange="handleFileSelection(this.files)">
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <button id="createFolderButton" class="btn btn-outline-primary btn-sm me-3" onclick="promptCreateFolder()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-plus me-1" viewBox="0 0 16 16">
+                          <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311L.5 6h-.5l.394 4.736A2 2 0 0 0 2 12h12a2 2 0 0 0 1.606-2.928L15.5 6h-1.648l.6-3H.5zm.61-1.015h13.78a.5.5 0 0 1 .49.432l.01.123.012.08H1.102a.5.5 0 0 1-.485-.411l-.01-.15zm.481 2.21H13.7l-.008.085L13.5 6H2.155a2.002 2.002 0 0 0-.256-.051l-.07-.024z"/>
+                          <path d="M12 9.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h1.5V10a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        New Folder
+                    </button>
+                    <p id="fileNameDisplay" class="small text-muted m-0">No file selected. Drag and drop works best.</p>
+                </div>
+
+                <button id="uploadFileButton" disabled
+                        class="btn btn-success fw-bold w-100 py-3 disabled:opacity-50"
+                        onclick="uploadSelectedFiles()">
+                    <span id="uploadButtonText">Upload File(s) to Current Folder</span>
+                </button>
+
+                <div id="progressBarContainer" class="progress mt-3 d-none" role="progressbar" aria-label="Upload progress">
+                    <div id="progressBar" class="progress-bar bg-primary" style="width: 0%"></div>
+                </div>
+                <p id="uploadStatus" class="mt-2 small text-center fw-medium"></p>
+            </div>
+
+            <!-- Folder Browser & File List -->
+            <div class="card p-4 shadow-sm">
+                <h2 class="h5 mb-3 text-secondary">3. Shared File System</h2>
+
+                <!-- Breadcrumb Navigation -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id="breadcrumbNav">
+                        <!-- Breadcrumbs injected here -->
+                    </ol>
+                </nav>
+
+                <div id="fileSystemContainer" class="list-group list-group-flush border rounded-3 overflow-hidden">
+                    <!-- File and Folder items injected here -->
+                    <p id="noItemsMessage" class="p-3 text-center text-muted m-0">This folder is empty.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer for User ID -->
+        <footer class="mt-4 text-center text-muted small">
+            Authenticated User ID: <span id="currentUserId" class="font-monospace text-dark">Loading...</span>
+        </footer>
+    </div>
+
+    <!-- Modal for loading/errors (replaces alert/confirm) -->
+    <div id="statusModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalMessage">Processing request...</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Load Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module">
+    // Firebase Imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, collection, query, onSnapshot, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+    import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Set Firestore debug logging
+    setLogLevel('Debug');
+
+    // --- Global Firebase and App State ---
+    let db;
+    let auth;
+    let storage;
+    let currentRoomId = null;
+    let unsubscribeSnapshot = null;
+    let selectedFiles = []; // Array to hold multiple files (for drag/multi-select)
+    let currentPath = '/'; // Root path is always '/'
+    const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB limit
+
+    // Modal Instance
+    const statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
+
+    // --- Firebase Initialization and Authentication ---
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    if (!firebaseConfig) {
+        showModal('Error', 'Firebase configuration is missing. Cannot initialize app.');
+    } else {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+        storage = getStorage(app);
+
+        async function authenticate() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase Auth Error:", error);
+                showModal('Auth Error', `Authentication failed: ${error.message}`);
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('currentUserId').textContent = user.uid;
+                document.getElementById('joinRoomButton').disabled = false;
+            } else {
+                document.getElementById('currentUserId').textContent = 'Authenticating...';
+                authenticate();
+            }
+        });
+
+        authenticate();
+    }
+
+    // --- Utility Functions ---
+
+    function showModal(title, message) {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalMessage').innerHTML = message;
+        statusModal.show();
+    }
+
+    function getRoomFilesCollectionPath() {
+        if (!currentRoomId) throw new Error("Room ID is not set.");
+        // Public file metadata collection path
+        return `artifacts/${appId}/public/data/transfers/${currentRoomId}/files`;
+    }
+
+    function getStoragePath(fileName) {
+        if (!currentRoomId) throw new Error("Room ID is not set.");
+        // Storage path includes the full file system path
+        const uniqueID = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+        // Path is: [appId]/transfers/[roomId]/[currentPath (sanitized)]/[uniqueID]-[fileName]
+        const cleanPath = currentPath.replace(/^\/|\/$/g, '').replace(/\//g, '___'); // Replace slashes with safe separator
+        return `${appId}/transfers/${currentRoomId}/${cleanPath || 'root'}/${uniqueID}-${fileName}`;
+    }
+
+
+    // --- Connection Logic ---
+
+    function joinRoom() {
+        if (!db || !auth.currentUser) {
+            showModal('Error', 'Database connection not ready.');
+            return;
+        }
+
+        const roomId = document.getElementById('roomIdInput').value.trim();
+        if (roomId.length < 3) {
+            showModal('Input Error', 'Please enter a Transfer ID with at least 3 characters.');
+            return;
+        }
+
+        currentRoomId = roomId;
+        document.getElementById('roomStatus').textContent = `Connecting to ${currentRoomId}...`;
+
+        if (unsubscribeSnapshot) unsubscribeSnapshot();
+
+        const filesCollection = collection(db, getRoomFilesCollectionPath());
+        const q = query(filesCollection);
+
+        // Listener fetches ALL file metadata in the room, and JS handles filtering/navigation
+        unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+            let files = [];
+            snapshot.forEach((doc) => {
+                files.push({ id: doc.id, ...doc.data() });
+            });
+            window.roomFiles = files; // Store all files globally for file system rendering
+            document.getElementById('roomStatus').textContent = `Connected to Room: ${currentRoomId}`;
+            document.getElementById('connection-panel').classList.add('d-none');
+            document.getElementById('transfer-panel').classList.remove('d-none');
+            renderFileSystem(window.roomFiles); // Initial render
+        }, (error) => {
+            console.error("Firestore Listener Error:", error);
+            showModal('Connection Error', `Failed to connect: ${error.message}`);
+            document.getElementById('roomStatus').textContent = `Connection failed.`;
+            document.getElementById('connection-panel').classList.remove('d-none');
+            document.getElementById('transfer-panel').classList.add('d-none');
+        });
+    }
+    window.joinRoom = joinRoom;
+
+
+    // --- File System Navigation & Rendering ---
+
+    function navigateTo(target) {
+        if (target === '..') {
+            // Go up one level
+            const parts = currentPath.split('/').filter(p => p.length > 0);
+            parts.pop();
+            currentPath = '/' + parts.join('/') + (parts.length > 0 ? '/' : '');
+        } else if (target === '/') {
+            currentPath = '/';
+        } else {
+            // Go into a folder
+            currentPath = currentPath + target + '/';
+        }
+        renderFileSystem(window.roomFiles || []); // Re-render with new path
+    }
+    window.navigateTo = navigateTo;
+
+
+    function renderFileSystem(allFiles) {
+        const container = document.getElementById('fileSystemContainer');
+        const noItemsMessage = document.getElementById('noItemsMessage');
+        const breadcrumbNav = document.getElementById('breadcrumbNav');
+        container.innerHTML = '';
+        noItemsMessage.classList.add('d-none');
+
+        const currentFiles = [];
+        const currentFolders = new Set();
+        const currentPathClean = currentPath.replace(/^\/|\/$/g, '');
+
+        // 1. Determine items in the current directory
+        allFiles.forEach(file => {
+            const filePathClean = file.path.replace(/^\/|\/$/g, '');
+
+            if (filePathClean === currentPathClean) {
+                // Exact match means it's a file in the current folder
+                currentFiles.push(file);
+            } else if (filePathClean.startsWith(currentPathClean + '/') || (currentPath === '/' && filePathClean.length > 0)) {
+                // If the path starts with the current path, it's a child item
+                let relativePath = filePathClean.substring(currentPathClean.length).replace(/^\//, ''); // Remove leading slash if present
+                
+                if (currentPath === '/') {
+                    relativePath = filePathClean; // Special handling for root
+                }
+
+                const segment = relativePath.split('/')[0];
+                if (relativePath.includes('/')) {
+                    // It's a folder (e.g., 'images' from 'images/file.jpg')
+                    currentFolders.add(segment);
+                } else if (currentPath === '/' && !relativePath.includes('/')) {
+                     // It's a file at root (e.g., 'fileB.txt' from path: '/fileB.txt')
+                     currentFiles.push(file);
+                }
+            }
+        });
+
+
+        // 2. Build Breadcrumbs
+        breadcrumbNav.innerHTML = '';
+        if (currentPath !== '/') {
+            const upButton = document.createElement('li');
+            upButton.className = 'breadcrumb-item';
+            upButton.innerHTML = `<a href="#" onclick="event.preventDefault(); navigateTo('..')"><span class="text-primary fw-bold me-1">&#x2190;</span>Up Level</a>`;
+            breadcrumbNav.appendChild(upButton);
+        }
+
+        let pathSegments = currentPath.split('/').filter(p => p.length > 0);
+        let currentBreadcrumbPath = '/';
+        pathSegments.forEach((segment, index) => {
+            const li = document.createElement('li');
+            li.className = 'breadcrumb-item ' + (index === pathSegments.length - 1 ? 'active text-primary' : '');
+            li.setAttribute('aria-current', 'page');
+            
+            if (index < pathSegments.length - 1) {
+                currentBreadcrumbPath += segment + '/';
+                li.innerHTML = `<a href="#" onclick="event.preventDefault(); navigateTo('${currentBreadcrumbPath}')">${segment}</a>`;
+            } else {
+                li.textContent = segment;
+            }
+            breadcrumbNav.appendChild(li);
+        });
+
+        // 3. Render Folders
+        Array.from(currentFolders).sort().forEach(folderName => {
+            const folderItem = document.createElement('div');
+            folderItem.className = 'folder-item list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3';
+            folderItem.onclick = () => navigateTo(folderName);
+            folderItem.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <span class="text-primary me-3 fs-5">&#128193;</span> <!-- Folder icon emoji -->
+                    <span class="fw-semibold">${folderName}</span>
+                </div>
+                <span class="badge text-bg-secondary">Folder</span>
+            `;
+            container.appendChild(folderItem);
+        });
+
+         // 4. Render Files
+        currentFiles.sort((a, b) => (b.uploadTime?.seconds || 0) - (a.uploadTime?.seconds || 0)).forEach(file => {
+            const fileSizeMB = (file.fileSize / 1024 / 1024).toFixed(2);
+            const uploadDate = file.uploadTime ? new Date(file.uploadTime.seconds * 1000).toLocaleString() : 'N/A';
+
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item list-group-item d-flex justify-content-between align-items-center py-3';
+            fileItem.innerHTML = `
+                <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center me-3">
+                    <span class="text-secondary me-3 fs-5">&#128196;</span> <!-- File icon emoji -->
+                    <div class="d-flex flex-column">
+                        <span class="fw-semibold text-break">${file.fileName}</span>
+                        <span class="small text-muted">${fileSizeMB} MB | Uploaded: ${uploadDate}</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center flex-shrink-0">
+                    <a href="${file.downloadURL}" download="${file.fileName}" target="_blank"
+                       class="btn btn-sm btn-primary me-2">
+                        Download
+                    </a>
+                    ${file.uploaderId === auth.currentUser.uid ?
+                        `<button class="btn btn-sm btn-danger delete-file-btn"
+                                data-file-id="${file.id}" data-storage-path="${file.storagePath}" data-file-name="${file.fileName}">
+                            Delete
+                        </button>`
+                        : ''
+                    }
+                </div>
+            `;
+            container.appendChild(fileItem);
+        });
+
+        if (container.children.length === 0) {
+             noItemsMessage.classList.remove('d-none');
+             container.appendChild(noItemsMessage);
+              }
+
+        // Attach delete listener
+        container.querySelectorAll('.delete-file-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const { fileId, storagePath, fileName } = e.currentTarget.dataset;
+                deleteFile(fileId, storagePath, fileName);
+            });
+        });
+    }
+
+
+    // --- File Selection & Upload Logic ---
+
+    function handleFileSelection(files) {
+        selectedFiles = Array.from(files).filter(file => {
+            if (file.size > MAX_FILE_SIZE) {
+                showModal('Size Error', `File "${file.name}" is too large (${(file.size / 1024 / 1024).toFixed(2)} MB). Max limit is 50 MB.`);
+                return false;
+            }
+            return true;
+        });
+
+        const uploadButton = document.getElementById('uploadFileButton');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+        if (selectedFiles.length > 0) {
+            fileNameDisplay.innerHTML = `Ready to upload: **${selectedFiles.length} file(s)** to <span class="text-primary">${currentPath}</span>`;
+            uploadButton.disabled = false;
+        } else {
+            fileNameDisplay.textContent = 'No file selected. Drag and drop works best.';
+            uploadButton.disabled = true;
+        }
+    }
+    window.handleFileSelection = handleFileSelection;
+
+    async function uploadSelectedFiles() {
+        if (selectedFiles.length === 0) return;
+
+        const uploadButton = document.getElementById('uploadFileButton');
+        const uploadStatusElement = document.getElementById('uploadStatus');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const progressBar = document.getElementById('progressBar');
+
+        const filesToUpload = [...selectedFiles]; // Clone the array
+        selectedFiles = []; // Clear selection
+        document.getElementById('fileInput').value = ''; // Reset input
+
+        uploadButton.disabled = true;
+        progressBarContainer.classList.remove('d-none');
+        progressBar.style.width = '0%';
+
+        try {
+            for (const [index, file] of filesToUpload.entries()) {
+                uploadStatusElement.textContent = `Uploading file ${index + 1} of ${filesToUpload.length}: ${file.name}...`;
+
+                const storagePath = getStoragePath(file.name);
+                const fileRef = storageRef(storage, storagePath);
+                const uploadTask = uploadBytesResumable(fileRef, file);
+
+                await new Promise((resolve, reject) => {
+                    uploadTask.on('state_changed',
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            const overallProgress = (index + (progress / 100)) / filesToUpload.length * 100;
+                            progressBar.style.width = overallProgress.toFixed(0) + '%';
+                        },
+                        (error) => { reject(new Error(`Storage upload failed for ${file.name}: ${error.code}`)); },
+                        async () => {
+                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+                            const fileData = {
+                                fileName: file.name,
+                                fileSize: file.size,
+                                fileType: file.type || 'application/octet-stream',
+                                uploadTime: serverTimestamp(),
+                                uploaderId: auth.currentUser.uid,
+                                downloadURL: downloadURL,
+                                storagePath: storagePath,
+                                path: currentPath // Store the folder path
+                            };
+
+                            const filesCollection = collection(db, getRoomFilesCollectionPath());
+                            await setDoc(doc(filesCollection), fileData);
+                            resolve();
+                        }
+                    );
+                });
+            }
+
+            uploadStatusElement.textContent = `Successfully uploaded ${filesToUpload.length} file(s).`;
+            uploadStatusElement.classList.add('text-success');
+
+        } catch (error) {
+            console.error("Upload Error:", error);
+            uploadStatusElement.textContent = `Upload process failed. Some files may be missing. Error: ${error.message}`;
+            uploadStatusElement.classList.add('text-danger');
+        } finally {
+            uploadButton.disabled = false;
+            progressBarContainer.classList.add('d-none');
+            // Re-enable button text
+            document.getElementById('uploadButtonText').textContent = 'Upload File(s) to Current Folder';
+        }
+    }
+    window.uploadSelectedFiles = uploadSelectedFiles;
+
+    // --- Folder Creation Logic ---
+
+    function promptCreateFolder() {
+        // Use a simple prompt for no-confirmation/password flow
+        const folderName = window.prompt("Enter the name for the new folder (e.g., 'Pictures'):");
+
+        if (folderName && folderName.trim().length > 0) {
+            createEmptyFolder(folderName.trim());
+        }
+    }
+    window.promptCreateFolder = promptCreateFolder;
+
+    async function createEmptyFolder(name) {
+        // To show an empty folder, we must create a dummy file inside it.
+        // The dummy file will be named '.__folder_placeholder__'
+        const placeholderName = '.__folder_placeholder__';
+        const fullPath = currentPath + name + '/';
+
+        try {
+            const fileData = {
+                fileName: placeholderName,
+                fileSize: 0,
+                fileType: 'application/x-placeholder',
+                uploadTime: serverTimestamp(),
+                uploaderId: auth.currentUser.uid,
+                downloadURL: '',
+                storagePath: '',
+                path: fullPath
+            };
+
+            const filesCollection = collection(db, getRoomFilesCollectionPath());
+            await setDoc(doc(filesCollection), fileData);
+            showModal('Success', `Folder '${name}' created at ${currentPath}.`);
+            navigateTo(name); // Navigate into the new folder
+        } catch (error) {
+            console.error("Folder Creation Error:", error);
+            showModal('Error', `Could not create folder: ${error.message}`);
+        }
+              }
+
+    // --- Deletion Logic ---
+
+    async function deleteFile(fileId, storagePath, fileName) {
+        showModal('Deleting...', `Initiating deletion of '${fileName}'.`);
+
+        try {
+            // 1. Delete file from Firebase Storage (if it's a real file)
+            if (storagePath) {
+                const fileRef = storageRef(storage, storagePath);
+                await deleteObject(fileRef);
+            }
+
+            // 2. Delete metadata from Firestore
+            const filesCollectionPath = getRoomFilesCollectionPath();
+            const docRef = doc(db, filesCollectionPath, fileId);
+            await deleteDoc(docRef);
+
+            showModal('Success', `File '${fileName}' has been deleted.`);
+
+        } catch (error) {
+            console.error("Deletion Error:", error);
+            // Ignore 'object-not-found' errors for robustness, but delete metadata anyway
+            if (error.code === 'storage/object-not-found') {
+                showModal('Success', `File deleted. Storage file was missing, but metadata was removed.`);
+            } else {
+                 showModal('Deletion Failed', `Could not delete item: ${error.message}`);
+            }
+        }
+    }
+
+    // --- Drag and Drop Setup ---
+
+    const dragDropZone = document.getElementById('dragDropZone');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, () => dragDropZone.classList.add('active'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, () => dragDropZone.classList.remove('active'), false);
+    });
+
+    dragDropZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        handleFileSelection(dt.files); // Use the existing file selection logic
+    }
+</script>
+</body>
+</html>
+              
+              
