@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTPS < 10MB</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; }
+        .card { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        input[type="file"] { display: none; }
+        .file-upload-label { cursor: pointer; transition: background-color 0.2s; }
+        .file-upload-label:hover { background-color: #3b82f6; }
+        .drag-zone {
+            border: 2px dashed #93c5fd;
+            transition: all 0.2s;
+        }
+        .drag-zone.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 min-h-screen flex items-start justify-center">
+
+    <div class="w-full max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">FTPS < 10MB</h1>
+            <p class="text-gray-500">
+                Transfer files (< 10MB) between devices using ID.
+            </p>
+        </header>
+
+        <!-- Connection Panel -->
+        <div id="connection-panel" class="card bg-white p-6 rounded-xl mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">1. Connect to a Transfer Room (Passwordless)</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="roomIdInput" placeholder="Enter a unique Transfer ID (e.g., Summer-Project-2025)"
+                       class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150">
+                <button id="joinRoomButton" disabled
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-150 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Join Room
+                </button>
+            </div>
+            <p id="roomStatus" class="mt-3 text-sm text-gray-600 font-medium"></p>
+        </div>
+
+        <!-- Transfer Panel (Hidden until connected) -->
+        <div id="transfer-panel" class="hidden">
+            <!-- Upload Panel -->
+            <div class="card bg-white p-6 rounded-xl mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">2. Drag & Drop or Upload File</h2>
+                <div id="dragDropZone" class="drag-zone p-6 text-center rounded-lg mb-4">
+                    <p class="text-gray-600 font-medium text-lg mb-2">Drag files here</p>
+                    <p class="text-gray-400 text-sm">Max file size: 10 MB</p>
+                    <input type="file" id="fileInput" onchange="handleFileSelection(this.files)">
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <label for="fileInput" id="fileUploadLabel" class="file-upload-label bg-blue-500 text-white font-semibold p-4 rounded-lg text-center hover:bg-blue-600 transition duration-200">
+                        Or click to browse files
+                    </label>
+                    <p id="fileNameDisplay" class="text-sm text-gray-500">No file selected</p>
+
+                    <button id="uploadFileButton" disabled
+                            class="bg-green-500 opacity-50 cursor-not-allowed text-white font-bold py-3 px-6 rounded-lg transition duration-150 ease-in-out"
+                            onclick="uploadFile()">
+                        Upload to Room
+                    </button>
+                    <div id="progressBarContainer" class="w-full bg-gray-200 rounded-full h-2.5 hidden">
+                        <div id="progressBar" class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p id="uploadStatus" class="mt-2 text-sm text-center font-medium"></p>
+                </div>
+            </div>
+
+            <!-- Download Panel -->
+            <div class="card bg-white p-6 rounded-xl">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">3. Available Files in Room</h2>
+                <div id="fileListContainer" class="space-y-3">
+                    <p id="noFilesMessage" class="text-gray-500 italic">Listening for files...</p>
+                    <!-- File cards will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer for User ID -->
+        <footer class="mt-8 text-center text-xs text-gray-400">
+            Authenticated User ID: <span id="currentUserId" class="font-mono text-gray-600">Loading...</span>
+        </footer>
+    </div>
+
+    <!-- Modal for loading/errors (replaces alert/confirm) -->
+    <div id="statusModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 p-4" onclick="closeModal()">
+        <div class="bg-white p-6 rounded-xl w-full max-w-sm transform transition-all" onclick="event.stopPropagation()">
+            <h3 id="modalTitle" class="text-xl font-bold mb-3">Status</h3>
+            <p id="modalMessage" class="text-gray-700 mb-4">Processing request...</p>
+            <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition duration-150">Close</button>
+        </div>
+    </div>
+
+<script type="module">
+    // Firebase Imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, collection, query, onSnapshot, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+    import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Set Firestore debug logging
+    setLogLevel('Debug');
+
+    // --- Global Firebase and App State ---
+    let db;
+    let auth;
+    let storage;
+    let currentRoomId = null;
+    let unsubscribeSnapshot = null;
+    let selectedFile = null;
+    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB limit
+
+    // --- Firebase Initialization and Authentication ---
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    if (!firebaseConfig) {
+        showModal('Error', 'Firebase configuration is missing. Cannot initialize app.');
+        console.error('Firebase config not found.');
+    } else {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+        storage = getStorage(app); // Initialize Storage
+
+        async function authenticate() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase Auth Error:", error);
+                showModal('Auth Error', `Authentication failed: ${error.message}`);
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userId = user.uid;
+                document.getElementById('currentUserId').textContent = userId;
+                document.getElementById('joinRoomButton').disabled = false;
+                console.log(`Authenticated with ID: ${userId}`);
+            } else {
+                document.getElementById('currentUserId').textContent = 'Not Authenticated';
+                authenticate(); // Attempt to sign in if not signed in
+            }
+        });
+
+        // Initial call to start authentication process
+        authenticate();
+    }
+
+    // --- Modal Functions (to replace alert/confirm) ---
+
+    function showModal(title, message) {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalMessage').textContent = message;
+        document.getElementById('statusModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('statusModal').classList.add('hidden');
+    }
+
+    window.closeModal = closeModal; // Expose to global scope for HTML onclick
+
+    // --- Connection Logic ---
+
+    function getRoomCollectionPath() {
+        if (!currentRoomId) throw new Error("Room ID is not set.");
+        // Use a collection path that is public to the app/room for collaboration
+        return `artifacts/${appId}/public/data/transfers`;
+    }
+
+    function getStoragePath(fileName) {
+        if (!currentRoomId) throw new Error("Room ID is not set.");
+        const uniqueFileName = `${Date.now()}-${auth.currentUser.uid}-${fileName}`;
+        // Store in a bucket structure related to the app and room
+        return `${appId}/transfers/${currentRoomId}/${uniqueFileName}`;
+    }
+
+    function joinRoom() {
+        if (!db || !auth.currentUser) {
+            showModal('Error', 'Database connection not ready. Please wait for authentication.');
+            return;
+        }
+
+        const roomIdInput = document.getElementById('roomIdInput');
+        const roomId = roomIdInput.value.trim();
+
+        if (roomId.length < 3) {
+            showModal('Input Error', 'Please enter a unique Transfer ID with at least 3 characters.');
+            return;
+        }
+
+        currentRoomId = roomId;
+        document.getElementById('roomStatus').textContent = `Attempting to join room: ${currentRoomId}...`;
+
+        // 1. Clean up any existing listener
+        if (unsubscribeSnapshot) {
+            unsubscribeSnapshot();
+        }
+
+        // 2. Define the Firestore collection path for this public transfer room
+        const filesCollection = collection(db, `${getRoomCollectionPath()}/${currentRoomId}/files`);
+        const q = query(filesCollection);
+
+        // 3. Set up the real-time listener (onSnapshot)
+        unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+            let files = [];
+            snapshot.forEach((doc) => {
+                files.push({ id: doc.id, ...doc.data() });
+            });
+            // Sort by upload time (newest first)
+            files.sort((a, b) => (b.uploadTime?.seconds || 0) - (a.uploadTime?.seconds || 0));
+
+            renderFileList(files);
+            document.getElementById('roomStatus').textContent = `Successfully connected to Transfer Room: ${currentRoomId}`;
+            document.getElementById('connection-panel').classList.add('hidden');
+            document.getElementById('transfer-panel').classList.remove('hidden');
+
+        }, (error) => {
+            console.error("Firestore Listener Error:", error);
+            showModal('Connection Error', `Failed to listen for files: ${error.message}`);
+            document.getElementById('roomStatus').textContent = `Connection failed. Error: ${error.message}`;
+            document.getElementById('connection-panel').classList.remove('hidden');
+            document.getElementById('transfer-panel').classList.add('hidden');
+        });
+    }
+
+    window.joinRoom = joinRoom;
+
+    // --- File Handling and Upload Logic ---
+
+    function handleFileSelection(files) {
+        const uploadButton = document.getElementById('uploadFileButton');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        selectedFile = null;
+        fileNameDisplay.textContent = 'No file selected';
+        uploadButton.disabled = true;
+        uploadButton.classList.add('opacity-50', 'cursor-not-allowed');
+        uploadButton.classList.remove('hover:bg-green-600');
+
+        if (files.length === 0) return;
+
+        const file = files[0];
+
+        if (file.size > MAX_FILE_SIZE) {
+            fileNameDisplay.textContent = `File is too large (${(file.size / 1024 / 1024).toFixed(2)} MB). Max limit is ${(MAX_FILE_SIZE / 1024 / 1024).toFixed(0)} MB.`;
+            fileNameDisplay.className = 'text-sm text-red-500 font-bold';
+            return;
+        }
+
+        selectedFile = file;
+        fileNameDisplay.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+        fileNameDisplay.className = 'text-sm text-gray-500';
+        uploadButton.disabled = false;
+        uploadButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        uploadButton.classList.add('hover:bg-green-600');
+    }
+    window.handleFileSelection = handleFileSelection;
+
+    async function uploadFile() {
+        const file = selectedFile;
+        const uploadStatusElement = document.getElementById('uploadStatus');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const progressBar = document.getElementById('progressBar');
+
+        if (!file) {
+            uploadStatusElement.textContent = 'Please select a file first.';
+            uploadStatusElement.className = 'mt-2 text-sm text-center font-medium text-red-500';
+            return;
+        }
+
+        uploadStatusElement.textContent = 'Starting upload...';
+        uploadStatusElement.className = 'mt-2 text-sm text-center font-medium text-blue-500';
+        document.getElementById('uploadFileButton').disabled = true;
+        progressBarContainer.classList.remove('hidden');
+
+        try {
+            const storagePath = getStoragePath(file.name);
+            const fileRef = storageRef(storage, storagePath);
+            const uploadTask = uploadBytesResumable(fileRef, file);
+
+            // Listen for upload progress
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    progressBar.style.width = progress + '%';
+                    uploadStatusElement.textContent = `Upload is ${progress.toFixed(0)}% done...`;
+                },
+                (error) => {
+                    throw new Error(`Storage upload failed: ${error.code}`);
+                },
+                async () => {
+                    // Upload complete, get the download URL
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+                    // Create the document to save to Firestore (metadata only)
+                    const fileData = {
+                        fileName: file.name,
+                        fileSize: file.size,
+                        fileType: file.type || 'application/octet-stream',
+                        uploadTime: serverTimestamp(),
+                        uploaderId: auth.currentUser.uid,
+                        downloadURL: downloadURL,
+                        storagePath: storagePath
+                    };
+
+                    // Save metadata to Firestore
+                    const filesCollection = collection(db, `${getRoomCollectionPath()}/${currentRoomId}/files`);
+                    await setDoc(doc(filesCollection), fileData);
+
+                    uploadStatusElement.textContent = `Successfully uploaded and shared: ${file.name}`;
+                    uploadStatusElement.className = 'mt-2 text-sm text-center font-medium text-green-500';
+
+                    // Reset state
+                    selectedFile = null;
+                    document.getElementById('fileInput').value = '';
+                    document.getElementById('fileNameDisplay').textContent = 'No file selected';
+                    progressBarContainer.classList.add('hidden');
+                    progressBar.style.width = '0%';
+                }
+            );
+
+        } catch (error) {
+            console.error("Upload Error:", error);
+            uploadStatusElement.textContent = `Upload failed: ${error.message}`;
+            uploadStatusElement.className = 'mt-2 text-sm text-center font-medium text-red-500';
+            document.getElementById('uploadFileButton').disabled = false;
+            progressBarContainer.classList.add('hidden');
+        }
+    }
+    window.uploadFile = uploadFile;
+
+    // --- Drag and Drop Implementation ---
+
+    const dragDropZone = document.getElementById('dragDropZone');
+
+    // Prevent default drag behavior
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    // Highlight drop zone when item is dragged over
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, () => dragDropZone.classList.add('active'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, () => dragDropZone.classList.remove('active'), false);
+    });
+
+    // Handle dropped files
+    dragDropZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        let files = dt.files;
+
+        // Pass the dropped files to the standard file handler
+        handleFileSelection(files);
+    }
+
+    // --- File List and Actions ---
+
+    function renderFileList(files) {
+        const container = document.getElementById('fileListContainer');
+        container.innerHTML = '';
+        document.getElementById('noFilesMessage').classList.add('hidden');
+
+        if (files.length === 0) {
+            document.getElementById('noFilesMessage').classList.remove('hidden');
+            container.appendChild(document.getElementById('noFilesMessage'));
+            return;
+        }
+
+        files.forEach(file => {
+            const fileSizeMB = (file.fileSize / 1024 / 1024).toFixed(2);
+            const uploadDate = file.uploadTime ? new Date(file.uploadTime.seconds * 1000).toLocaleString() : 'N/A';
+
+            const card = document.createElement('div');
+            card.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-50 border border-gray-200 rounded-lg transition duration-150 hover:border-blue-400';
+            card.innerHTML = `
+                <div class="flex flex-col mb-3 sm:mb-0">
+                    <span class="font-semibold text-gray-800 break-all">${file.fileName}</span>
+                    <span class="text-sm text-gray-500">${fileSizeMB} MB | Uploaded: ${uploadDate}</span>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="${file.downloadURL}" download="${file.fileName}" target="_blank"
+                       class="download-button bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-150 block">
+                        Download
+                    </a>
+                    ${file.uploaderId === auth.currentUser.uid ?
+                        `<button class="delete-button bg-red-500 hover:bg-red-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-150"
+                                data-file-id="${file.id}" data-storage-path="${file.storagePath}" data-file-name="${file.fileName}">
+                            Delete
+                        </button>`
+                        : ''
+                    }
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        // Attach event listener to delete buttons
+        container.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const { fileId, storagePath, fileName } = e.currentTarget.dataset;
+                deleteFile(fileId, storagePath, fileName);
+            });
+        });
+    }
+
+    /**
+     * Deletes a file from both Firebase Storage and Firestore (metadata).
+     * No confirmation prompt is used.
+     * @param {string} fileId The document ID of the file in Firestore.
+     * @param {string} storagePath The path to the file in Firebase Storage.
+     * @param {string} fileName The name of the file (for UI status).
+     */
+    async function deleteFile(fileId, storagePath, fileName) {
+        showModal('Deleting...', `Attempting to delete '${fileName}'. This action cannot be undone.`);
+
+        try {
+            // 1. Delete file from Firebase Storage
+            const fileRef = storageRef(storage, storagePath);
+            await deleteObject(fileRef);
+
+            // 2. Delete metadata from Firestore
+            const filesCollectionPath = `${getRoomCollectionPath()}/${currentRoomId}/files`;
+            const docRef = doc(db, filesCollectionPath, fileId);
+            await deleteDoc(docRef);
+
+            showModal('Success', `File '${fileName}' has been permanently deleted.`);
+
+        } catch (error) {
+            console.error("Deletion Error:", error);
+            // Handle expected error if the storage file is already gone but metadata remains
+            if (error.code === 'storage/object-not-found') {
+                try {
+                    // Try to delete only the metadata if the file is gone
+                    const filesCollectionPath = `${getRoomCollectionPath()}/${currentRoomId}/files`;
+                    const docRef = doc(db, filesCollectionPath, fileId);
+                    await deleteDoc(docRef);
+                    showModal('Success', `File metadata for '${fileName}' deleted (file was missing from storage).`);
+                } catch(e) {
+                     showModal('Deletion Failed', `Could not delete file metadata for '${fileName}'. Error: ${e.message}`);
+                }
+            } else {
+                showModal('Deletion Failed', `Could not delete file: ${error.message}`);
+            }
+        }
+    }
+</script>
+</body>
+</html>
+
