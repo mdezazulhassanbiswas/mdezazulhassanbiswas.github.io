@@ -1,12 +1,12 @@
 # Web Developer | Hassan Biswas
-@hassanbiswas
+https://github.com/hassanbiswas
 
 ## Contact
-   - hassanbiswas.github.io
+   - https://hassanbiswas.github.io
    - hassanbiswas.github.io@gmail.com
 
-   - facebook.com/hassanbiswas.github.io
-   - instagram.com/hassanbiswas.github.io
+   - https://facebook.com/hassanbiswas.github.io
+   - https://instagram.com/hassanbiswas.github.io
 
     
 
