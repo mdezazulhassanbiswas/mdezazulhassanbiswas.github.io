@@ -1,5 +1,5 @@
 # Web Developer | Hassan Biswas
-https://github.com/hassanbiswas
+https://github.com/@hassanbiswas
 
 ## Contact
    - https://hassanbiswas.github.io
