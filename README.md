@@ -3,9 +3,9 @@
 
 ## Contact
    -     https://hassanbiswas.github.io
-   -     hassanbiswas.github.io@gmail.com
-   -     https://facebook.com/hassanbiswas.github.io
-   -     https://instagram.com/hassanbiswas.github.io
+   -     https://hassanbiswas.github.io/gmail
+   -     https://hassanbiswas.github.io/facebook
+   -     https://hassanbiswas.github.io/instagram
 
     
 
