@@ -1,11 +1,26 @@
-# Web Developer | Hassan Biswas
 @hassanbiswas
+# Web Developer | Hassan Biswas
+### Website Designer & Front-end Developer
 
 ## Contact
-   -     https://hassanbiswas.github.io
-   -     https://hassanbiswas.github.io/gmail
-   -     https://hassanbiswas.github.io/facebook
-   -     https://hassanbiswas.github.io/instagram
+-  Messenger :
+-              hassanbiswas.github.io/messenger
+-  Portfolio :
+-              hassanbiswas.github.io/portfolio
+-  Gmail     :
+-              hassanbiswas.github.io/gmail  
+-  Whatsapp  :
+-              hassanbiswas.github.io/whatsapp
+
+## Follow
+- Facebook  :
+-             hassanbiswas.github.io/facebook
+- Instagram :
+-             hassanbiswas.github.io/instagram
+- Threads   :
+-             hassanbiswas.github.io/threads
 
     
+## Acknowledgements:
+   All over the World
 
